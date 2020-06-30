@@ -7,6 +7,7 @@ Rails/React coding project for full-stack developer candidates
 - Build search interface to return images related to search term via API
 - For images that are returned, allow users to 'favorite' images
 - Allow users to view images they have favorited
+- Spend no more than 4 hours coding for the project. Do not include any initial application setup in this time limit.
 
 ### Add-ons:
 - Login functionality
