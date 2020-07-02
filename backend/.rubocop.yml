@@ -13,6 +13,9 @@ Lint/AmbiguousBlockAssociation:
 Layout/LineLength:
   Max: 120
 
+Metrics/BlockLength:
+  Enabled: false
+
 Style/Documentation:
   Exclude:
     - "db/**/*"
@@ -25,3 +28,6 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+RSpec/HookArgument:
+  EnforcedStyle: "each"

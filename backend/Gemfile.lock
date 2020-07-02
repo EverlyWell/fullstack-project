@@ -81,7 +81,16 @@ GEM
     concurrent-ruby (1.1.6)
     crass (1.0.6)
     diff-lcs (1.4.3)
+    dotenv (2.7.5)
+    dotenv-rails (2.7.5)
+      dotenv (= 2.7.5)
+      railties (>= 3.2, < 6.1)
     erubi (1.9.0)
+    factory_bot (6.0.2)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.0.0)
+      factory_bot (~> 6.0.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -89,6 +98,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
+    jwt (2.2.1)
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -270,7 +280,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bullet
   capybara (>= 2.15)
+  dotenv-rails
+  factory_bot_rails
   jbuilder (~> 2.7)
+  jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry (~> 0.10)
