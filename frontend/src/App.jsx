@@ -2,34 +2,47 @@ import React from 'react'
 import './App.css'
 import {
   BrowserRouter as Router,
-  Switch,
-  Route
+  Switch
 } from "react-router-dom"
 import Container from '@material-ui/core/Container'
 import Login from './Login'
 import Signup from './Signup'
 import Home from './Home'
+import AuthenticatedRoute from './AuthenticatedRoute'
+import UnauthenticatedRoute from './UnauthenticatedRoute'
+import { connect } from 'react-redux'
+import { setAuthToken, setAuthLoaded } from './actions/index'
+import Cookies from 'js-cookie'
 
-function App() {
+function App({ setAuthToken, setAuthLoaded }) {
+  let authToken = Cookies.get('userToken')
+  if(authToken && authToken.length) {
+    setAuthToken(authToken)
+  }
+  setAuthLoaded(true)
+
   return (
     <Router>
       <Container component="main">
         <Switch>
-          <Route path="/login">
+          <UnauthenticatedRoute path="/login">
             <Login />
-          </Route>
+          </UnauthenticatedRoute>
 
-          <Route path="/signup">
+          <UnauthenticatedRoute path="/signup">
             <Signup />
-          </Route>
+          </UnauthenticatedRoute>
 
-          <Route path="/">
+          <AuthenticatedRoute path="/">
             <Home />
-          </Route>
+          </AuthenticatedRoute>
         </Switch>
       </Container>
     </Router>
   )
 }
 
-export default App
+export default connect(
+  null,
+  { setAuthToken, setAuthLoaded }
+)(App)
