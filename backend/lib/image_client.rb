@@ -16,7 +16,7 @@ class ImageClient
 
   def initialize
     @api_instance = GiphyClient::DefaultApi.new
-    @api_key = ENV.fetch('GIPHY_API_KEY')
+    @api_key = ENV.fetch('GIPHY_API_KEY', '')
   end
 
   def search(query = nil, options = {})
@@ -28,7 +28,7 @@ class ImageClient
 
     results.data.map do |image|
       {
-        id: image.id,
+        source_id: image.id,
         origin_url: image.url,
         url: image.images.fixed_height&.url || image.images.original&.url
       }
