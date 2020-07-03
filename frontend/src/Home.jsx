@@ -15,6 +15,7 @@ import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 import { queryImages } from './services/images'
+import Image from './Image'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -116,12 +117,26 @@ function Home({ authToken, setAuthToken }) {
     debouncedSearch();
   }
 
+  function toggleImageFavorite(changedImage) {
+    let newImages = images.map((image) => {
+      if(image.id === changedImage.id) {
+        return {
+          ...image,
+          favorite: !image.favorite
+        }
+      } else {
+        return image
+      }
+    })
+    setImages(newImages)
+  }
+
   let imagesList
   if(errorMessage) {
     imagesList = <Alert severity="error">{errorMessage}</Alert>
   } else {
     imagesList = images.map((image) =>
-      <img key={image.id} src={image.url} />
+      <Image key={image.id} image={image} toggleImageFavorite={toggleImageFavorite} />
     )
   }
 
@@ -155,7 +170,6 @@ function Home({ authToken, setAuthToken }) {
           }
         </div>
 
-
         <Button color="inherit" onClick={logout}>
           Log Out
         </Button>
@@ -173,7 +187,7 @@ function Home({ authToken, setAuthToken }) {
   )
 }
 
-const mapStateToProps = ({ authToken, authLoaded }) => {
+const mapStateToProps = ({ authToken }) => {
   return {
     authToken
   }
