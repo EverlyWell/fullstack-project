@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import AppBar from '@material-ui/core/AppBar'
 import InputBase from '@material-ui/core/InputBase'
 import Button from '@material-ui/core/Button'
 import SearchIcon from '@material-ui/icons/Search'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Alert from '@material-ui/lab/Alert'
 import { fade, makeStyles } from '@material-ui/core/styles'
 import { setAuthToken } from './actions/index'
 import Cookies from 'js-cookie'
@@ -54,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
     top: 'calc(50% - 10px)',
   },
+  body: {
+    marginTop: theme.spacing(8),
+  }
 }))
 
 
@@ -62,12 +67,37 @@ function Home({ authToken, setAuthToken }) {
   let history = useHistory()
 
   const [searching, setSearching] = useState(false)
+  const [errorMessage, setError] = useState(null)
+  const [images, setImages] = useState([])
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   function logout() {
     Cookies.remove('userToken')
     setAuthToken(false)
     history.push('/login')
   }
+
+  function getImages(query) {
+    setError(null)
+    queryImages(authToken, query)
+      .then(({ data }) => {
+        setImages(data)
+      })
+      .catch(({ response }) => {
+        setError('Something went wrong. Try again later')
+      })
+      .finally(() => {
+        setSearching(false)
+      })
+  }
+
+  function getInitialImages() {
+    if(!imageLoaded) {
+      setImageLoaded(true)
+      getImages(null)
+    }
+  }
+  getInitialImages()
 
   let debouncedSearch
   function searchImage(event) {
@@ -79,20 +109,20 @@ function Home({ authToken, setAuthToken }) {
         setSearching(true)
 
         let query = event.target.value;
-        queryImages(authToken, query)
-        .then(({ data }) => {
-          debugger;
-        })
-        .catch(({ response }) => {
-          debugger;
-        })
-        .finally(() => {
-          setSearching(false)
-        })
+        getImages(query)
       }, 500);
     }
 
     debouncedSearch();
+  }
+
+  let imagesList
+  if(errorMessage) {
+    imagesList = <Alert severity="error">{errorMessage}</Alert>
+  } else {
+    imagesList = images.map((image) =>
+      <img key={image.id} src={image.url} />
+    )
   }
 
   return (
@@ -125,10 +155,20 @@ function Home({ authToken, setAuthToken }) {
           }
         </div>
 
+
         <Button color="inherit" onClick={logout}>
           Log Out
         </Button>
       </AppBar>
+
+      <Grid
+        container
+        direction="row"
+        justify="space-evenly"
+        className={classes.body}
+      >
+        {imagesList}
+      </Grid>
     </Container>
   )
 }
