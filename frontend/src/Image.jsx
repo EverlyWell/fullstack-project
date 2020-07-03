@@ -1,5 +1,11 @@
 import React from 'react'
 
+// Redux
+import { connect } from 'react-redux'
+
+// Services
+import { markFavorite, removeFavorite } from './services/images'
+
 // Libraries
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -31,13 +37,22 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-
-function Image({ image, toggleImageFavorite }) {
+function Image({ image, setError, toggleImageFavorite, authToken }) {
   const classes = useStyles()
 
   function toggleFavorite(event) {
     event.preventDefault()
-    toggleImageFavorite(image)
+    setError(null)
+    const toggleValue = !image.favorite
+    const apiCall = toggleValue ? markFavorite : removeFavorite
+
+    apiCall(authToken, image)
+    .then(({ data }) => {
+      toggleImageFavorite(image, toggleValue, data.id)
+    })
+    .catch(({ response }) => {
+      setError('Something went wrong. Try again later')
+    })
   }
 
   return (
@@ -64,8 +79,15 @@ function Image({ image, toggleImageFavorite }) {
         View Source
       </Link>
     </div>
-
   )
 }
 
-export default Image
+const mapStateToProps = ({ authToken }) => {
+  return {
+    authToken
+  }
+}
+export default connect(
+  mapStateToProps,
+  null
+)(Image)

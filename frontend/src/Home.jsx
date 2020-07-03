@@ -129,12 +129,13 @@ function Home({ authToken, setAuthToken }) {
     debouncedSearch();
   }
 
-  function toggleImageFavorite(changedImage) {
+  function toggleImageFavorite(changedImage, favoriteValue, id) {
     let newImages = images.map((image) => {
-      if(image.id === changedImage.id) {
+      if(image.source_id === changedImage.source_id) {
         return {
           ...image,
-          favorite: !image.favorite
+          id,
+          favorite: favoriteValue
         }
       } else {
         return image
@@ -186,6 +187,10 @@ function Home({ authToken, setAuthToken }) {
           Log Out
         </Button>
       </AppBar>
+
+      {errorMessage &&
+        <Alert severity="error">{errorMessage}</Alert>
+      }
 
       <Grid
         container
