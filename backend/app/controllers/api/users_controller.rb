@@ -11,7 +11,7 @@ module Api
       if user.save
         render json: { auth: user.auth_token }, status: :ok
       else
-        render json: { errors: user.errors.full_messages.to_sentence }, status: :bad_request
+        render json: { error: user.errors.full_messages.to_sentence }, status: :bad_request
       end
     end
 

@@ -6,7 +6,6 @@ import {
 } from "react-router-dom"
 import Container from '@material-ui/core/Container'
 import Login from './Login'
-import Signup from './Signup'
 import Home from './Home'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import UnauthenticatedRoute from './UnauthenticatedRoute'
@@ -26,11 +25,11 @@ function App({ setAuthToken, setAuthLoaded }) {
       <Container component="main">
         <Switch>
           <UnauthenticatedRoute path="/login">
-            <Login />
+            <Login screen="login" />
           </UnauthenticatedRoute>
 
           <UnauthenticatedRoute path="/signup">
-            <Signup />
+            <Login screen="signup" />
           </UnauthenticatedRoute>
 
           <AuthenticatedRoute path="/">

@@ -1,19 +1,37 @@
 import React, { useState } from 'react'
 import Container from '@material-ui/core/Container'
+import Grid from '@material-ui/core/Grid'
+import Alert from '@material-ui/lab/Alert';
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Link from '@material-ui/core/Link'
 import Button from '@material-ui/core/Button'
 import { connect } from 'react-redux'
 import { setAuthToken } from './actions/index'
-import { userLogin } from './services/user'
+import { registerUser, userLogin } from './services/user'
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
 
-function Login({ setAuthToken }) {
+const useStyles = makeStyles((theme) => ({
+  title: {
+    margin: theme.spacing(2, 0),
+  },
+
+  button: {
+    margin: theme.spacing(4, 0),
+  },
+}))
+
+function Login({ screen, setAuthToken }) {
+  const classes = useStyles()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
+
+  const isLogin = screen === 'login'
 
   let history = useHistory()
 
@@ -27,47 +45,64 @@ function Login({ setAuthToken }) {
 
   function login(event) {
     event.preventDefault()
+    setError(null)
     setSubmitting(true)
-    userLogin(email, password)
+    const apiCall = isLogin ? userLogin : registerUser
+
+    apiCall(email, password)
     .then(({ data }) => {
       let authToken = data.auth
       Cookies.set('userToken', authToken)
       setAuthToken(authToken)
       history.push('/')
     })
-    .catch((e) => {
-      console.error(e)
-    })
-    .finally(() => {
+    .catch(({ response }) => {
+      let errorMsg = 'Something went wrong. Try again later'
+      if(response && response.data && response.data.error) {
+        errorMsg = response.data.error
+      }
+      setError(errorMsg)
       setSubmitting(false)
     })
   }
 
   return (
-    <Container maxWidth="xs">
-      <Typography component="h1" variant="h5">
-        Log In
+    <Container maxWidth="xs" data-testid="login-page">
+      <Typography component="h1" variant="h5" className={classes.title}>
+        {isLogin ? 'Log In' : 'Sign Up'}
       </Typography>
 
-      <form className="login-form" noValidate onSubmit={login}>
+      {errorMessage && errorMessage.length &&
+        <Alert severity="error">{errorMessage}</Alert>
+      }
+
+      <form onSubmit={login}>
         <TextField
           required
           fullWidth
           autoFocus
+          margin="normal"
           label="Email Address"
           name="email"
           value={email}
           onChange={updateEmail}
+          inputProps={{
+            'data-testid': 'email-input'
+          }}
         />
 
         <TextField
           required
           fullWidth
+          margin="normal"
           name="password"
           label="Password"
           type="password"
           value={password}
           onChange={updatePassword}
+          inputProps={{
+            'data-testid': 'password-input'
+          }}
         />
 
         <Button
@@ -75,15 +110,20 @@ function Login({ setAuthToken }) {
           fullWidth
           variant="contained"
           color="primary"
-          className="submit-button"
           disabled={submitting}
+          className={classes.button}
         >
-          Log In
+          {isLogin ? 'Login' : 'Register'}
         </Button>
 
-        <Link href="/login" variant="body2">
-          {"Log In"}
-        </Link>
+        <Grid container direction="row" justify="center">
+          <Link
+            href={isLogin ? '/signup' : '/login'}
+            variant='body1'
+          >
+            {isLogin ? 'Don\'t have an account? Sign up.' : 'Already registered? Log in.'}
+          </Link>
+        </Grid>
       </form>
     </Container>
   )
