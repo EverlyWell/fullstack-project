@@ -1,6 +1,5 @@
 import React from 'react'
-import './App.css'
-import { Route, Redirect } from "react-router-dom"
+import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 function AuthenticatedRoute({ authToken, authLoaded, children, ...rest }) {

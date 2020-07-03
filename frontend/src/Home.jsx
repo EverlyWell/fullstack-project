@@ -1,20 +1,32 @@
 import React, { useState } from 'react'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Typography from '@material-ui/core/Typography'
-import AppBar from '@material-ui/core/AppBar'
-import InputBase from '@material-ui/core/InputBase'
-import Button from '@material-ui/core/Button'
-import SearchIcon from '@material-ui/icons/Search'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Alert from '@material-ui/lab/Alert'
-import { fade, makeStyles } from '@material-ui/core/styles'
-import { setAuthToken } from './actions/index'
-import Cookies from 'js-cookie'
+
+// Redux
 import { connect } from 'react-redux'
+import { setAuthToken } from './actions/index'
+
+// Services
+import { queryImages } from './services/images'
+
+// Libraries
+import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import debounce from 'lodash/debounce'
-import { queryImages } from './services/images'
+import { fade, makeStyles } from '@material-ui/core/styles'
+
+// Library Components
+import {
+  AppBar,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  InputBase,
+  Typography,
+} from '@material-ui/core'
+import SearchIcon from '@material-ui/icons/Search'
+import Alert from '@material-ui/lab/Alert'
+
+// Child Components
 import Image from './Image'
 
 const useStyles = makeStyles((theme) => ({

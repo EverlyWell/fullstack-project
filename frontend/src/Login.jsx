@@ -1,17 +1,27 @@
 import React, { useState } from 'react'
-import Container from '@material-ui/core/Container'
-import Grid from '@material-ui/core/Grid'
-import Alert from '@material-ui/lab/Alert'
-import Typography from '@material-ui/core/Typography'
-import TextField from '@material-ui/core/TextField'
-import Link from '@material-ui/core/Link'
-import Button from '@material-ui/core/Button'
+
+// Redux
 import { connect } from 'react-redux'
 import { setAuthToken } from './actions/index'
+
+// Services
 import { registerUser, userLogin } from './services/user'
+
+// Libraries
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
+
+// Library Components
+import {
+  Button,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+} from '@material-ui/core'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles((theme) => ({
   title: {

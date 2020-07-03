@@ -1,17 +1,25 @@
 import React from 'react'
 import './App.css'
+
+// Redux
+import { connect } from 'react-redux'
+import { setAuthToken, setAuthLoaded } from './actions/index'
+
+// Libraries
+import Cookies from 'js-cookie'
+
+// Library components
 import {
   BrowserRouter as Router,
   Switch
 } from "react-router-dom"
 import Container from '@material-ui/core/Container'
+
+// Child components
 import Login from './Login'
 import Home from './Home'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import UnauthenticatedRoute from './UnauthenticatedRoute'
-import { connect } from 'react-redux'
-import { setAuthToken, setAuthLoaded } from './actions/index'
-import Cookies from 'js-cookie'
 
 function App({ setAuthToken, setAuthLoaded }) {
   let authToken = Cookies.get('userToken')

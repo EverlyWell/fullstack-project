@@ -1,8 +1,15 @@
 import React from 'react'
-import Link from '@material-ui/core/Link'
+
+// Libraries
 import { makeStyles } from '@material-ui/core/styles'
-import FavoriteIcon from '@material-ui/icons/Favorite'
-import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined'
+
+// Library Components
+import Link from '@material-ui/core/Link'
+import {
+  Favorite as FavoriteIcon,
+  FavoriteBorderOutlined as FavoriteOutlinedIcon
+} from '@material-ui/icons'
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
