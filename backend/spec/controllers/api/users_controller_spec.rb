@@ -31,7 +31,7 @@ RSpec.describe Api::UsersController, type: :controller do
         expect do
           post :create, params: { email: email, password: 'admin0!' }
           assert_response 400
-        end.to change(User, :count).by(0)
+        end.not_to change(User, :count)
       end
     end
   end

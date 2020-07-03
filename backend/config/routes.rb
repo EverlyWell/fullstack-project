@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :images, only: [] do
       get :search, on: :collection
     end
+
+    resources :favorites, only: %i[index create destroy]
   end
 end
