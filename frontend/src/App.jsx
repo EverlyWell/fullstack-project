@@ -7,6 +7,7 @@ import { setAuthToken, setAuthLoaded } from './actions/index'
 
 // Libraries
 import Cookies from 'js-cookie'
+import { makeStyles } from '@material-ui/core/styles'
 
 // Library components
 import {
@@ -22,7 +23,18 @@ import Favorites from './Favorites'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import UnauthenticatedRoute from './UnauthenticatedRoute'
 
+const useStyles = makeStyles((theme) => ({
+  attribution: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    left: theme.spacing(2),
+    width: '150px',
+  }
+}))
+
 function App({ setAuthToken, setAuthLoaded }) {
+  const classes = useStyles()
+
   let authToken = Cookies.get('userToken')
   if(authToken && authToken.length) {
     setAuthToken(authToken)
@@ -49,6 +61,8 @@ function App({ setAuthToken, setAuthLoaded }) {
             <Home />
           </AuthenticatedRoute>
         </Switch>
+
+        <img src="/giphy-logo.gif" alt="Giphy Logo" className={classes.attribution} />
       </Container>
     </Router>
   )
