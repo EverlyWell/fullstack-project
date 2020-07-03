@@ -5,7 +5,10 @@ module Api
   class UsersController < ApplicationController
     skip_before_action :authenticate_user!, only: %i[create login]
 
-    # POST /api/users
+    # POST /api/users - Register a new user
+    #   params:
+    #     - email: User's email
+    #     - password: User's password
     def create
       user = User.new(create_params)
       if user.save
@@ -15,7 +18,10 @@ module Api
       end
     end
 
-    # GET /api/users/login
+    # GET /api/users/login - Login with existing user
+    #   params:
+    #     - email: User's email
+    #     - password: User's password
     def login
       user = User.find_by(email: params[:email])
       return render json: { error: 'No user with such email found' }, status: :bad_request unless user

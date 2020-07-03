@@ -6,5 +6,9 @@ Rails.application.routes.draw do
     resources :users, only: [:create] do
       post :login, on: :collection
     end
+
+    resources :images, only: [] do
+      get :search, on: :collection
+    end
   end
 end
