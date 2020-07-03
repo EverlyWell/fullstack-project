@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :email, presence: true,
                     uniqueness: { message: 'has already been taken' }
 
+  has_many :favorite_images, dependent: :destroy
+
   TOKEN_ISSUER = 'AwesomeServer'
   TOKEN_SECRET = ENV.fetch('JWT_KEY', '')
 
