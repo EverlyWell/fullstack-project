@@ -12,4 +12,12 @@ class User < ApplicationRecord
   def auth_token
     JWT.encode({ user_id: id, iss: TOKEN_ISSUER }, TOKEN_SECRET, 'HS256')
   end
+
+  def self.from_auth_token(token)
+    payload = JWT.decode(token, TOKEN_SECRET, true, { algorithm: 'HS256' })
+    user_id = payload&.first&.fetch('user_id')
+    User.find_by(id: user_id) if user_id
+  rescue JWT::DecodeError
+    nil
+  end
 end

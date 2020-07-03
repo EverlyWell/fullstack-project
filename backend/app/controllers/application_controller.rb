@@ -6,11 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   def current_user
-    # Decode token and get user
-    # User.find_by(id: )
+    User.from_auth_token(request.headers['Authorization'])
   end
 
   def authenticate_user!
-    render json: { error: 'Unauthorized' }, status: :unauthorized
+    render json: { error: 'Unauthorized' }, status: :unauthorized unless current_user
   end
 end
