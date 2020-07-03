@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     left: theme.spacing(1),
   },
   favoriteIcon: {
-    color: 'white',
+    color: '#eacad6',
   },
   source: {
     position: 'absolute',

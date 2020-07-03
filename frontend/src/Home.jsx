@@ -124,7 +124,7 @@ function Home({ authToken, setAuthToken }) {
 
     queryImages(authToken, query, page)
       .then(({ data }) => {
-        if(page == 1) {
+        if(page === 1) {
           setImages(data)
         } else {
           setImages([

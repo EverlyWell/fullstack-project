@@ -12,7 +12,7 @@ class ImageClient
     rating: 'g',
     lang: 'en',
     fmt: 'json'
-  }
+  }.freeze
 
   def initialize
     @api_instance = GiphyClient::DefaultApi.new
@@ -21,11 +21,19 @@ class ImageClient
 
   def search(query = nil, options = {})
     results = api_instance.gifs_search_get(
-                api_key,
-                query.present? ? "cat #{query}" : 'cat',
-                DEFAULT_OPTIONS.merge(options)
-              )
+      api_key,
+      query.present? ? "cat #{query}" : 'cat',
+      DEFAULT_OPTIONS.merge(options)
+    )
 
+    parse_results(results)
+  rescue GiphyClient::ApiError => e
+    Rails.logger.error { "Error fetching image: #{e}" }
+  end
+
+  private
+
+  def parse_results(results)
     results.data.map do |image|
       {
         source_id: image.id,
@@ -33,7 +41,5 @@ class ImageClient
         url: image.images.fixed_height&.url || image.images.original&.url
       }
     end
-  rescue GiphyClient::ApiError => e
-    Rails.logger.error { "Error fetching image: #{e}" }
   end
 end
