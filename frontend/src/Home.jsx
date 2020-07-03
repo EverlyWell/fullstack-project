@@ -26,6 +26,7 @@ import {
 import {
   Favorite as FavoriteIcon,
   Home as HomeIcon,
+  Pets as PetsIcon,
   Search as SearchIcon,
 } from '@material-ui/icons'
 import Alert from '@material-ui/lab/Alert'
@@ -91,6 +92,11 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     marginTop: theme.spacing(8),
+  },
+  loadMore: {
+    position: 'fixed',
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
   }
 }))
 
@@ -102,6 +108,8 @@ function Home({ authToken, setAuthToken }) {
   const [searching, setSearching] = useState(false)
   const [errorMessage, setError] = useState(null)
   const [images, setImages] = useState([])
+  const [currentQuery, setQuery] = useState(null)
+  const [currentPage, setPage] = useState(1)
   const [imageLoaded, setImageLoaded] = useState(false)
 
   function logout() {
@@ -110,11 +118,20 @@ function Home({ authToken, setAuthToken }) {
     history.push('/login')
   }
 
-  function getImages(query) {
+  function getImages(query, page) {
     setError(null)
-    queryImages(authToken, query)
+    setSearching(true)
+
+    queryImages(authToken, query, page)
       .then(({ data }) => {
-        setImages(data)
+        if(page == 1) {
+          setImages(data)
+        } else {
+          setImages([
+            ...images,
+            ...data
+          ])
+        }
       })
       .catch(({ response }) => {
         setError('Something went wrong. Try again later')
@@ -127,7 +144,7 @@ function Home({ authToken, setAuthToken }) {
   function getInitialImages() {
     if(!imageLoaded) {
       setImageLoaded(true)
-      getImages(null)
+      getImages(null, 1)
     }
   }
   getInitialImages()
@@ -139,14 +156,20 @@ function Home({ authToken, setAuthToken }) {
 
     if (!debouncedSearch) {
       debouncedSearch =  debounce(() => {
-        setSearching(true)
-
         let query = event.target.value;
-        getImages(query)
+        setQuery(query)
+        setPage(1)
+        getImages(query, 1)
       }, 500);
     }
 
     debouncedSearch();
+  }
+
+  function loadMoreImages() {
+    const newPage = currentPage + 1
+    setPage(newPage)
+    getImages(currentQuery, newPage)
   }
 
   function toggleImageFavorite(changedImage, favoriteValue, id) {
@@ -234,6 +257,22 @@ function Home({ authToken, setAuthToken }) {
       >
         {imagesList}
       </Grid>
+
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        disabled={searching}
+        startIcon={searching
+         ? <CircularProgress color="inherit" size={20} />
+         : <PetsIcon />
+        }
+        className={classes.loadMore}
+        onClick={loadMoreImages}
+      >
+        Load More
+
+      </Button>
     </Container>
   )
 }

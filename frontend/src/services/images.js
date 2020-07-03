@@ -1,8 +1,11 @@
 import axios from 'axios'
 
-export function queryImages(authToken, query) {
+export function queryImages(authToken, query, page) {
   return axios.get('/api/images/search', {
-    params: { query },
+    params: {
+      query,
+      page
+    },
     headers: {
       'Authorization': authToken
     }
