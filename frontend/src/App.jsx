@@ -18,6 +18,7 @@ import Container from '@material-ui/core/Container'
 // Child components
 import Login from './Login'
 import Home from './Home'
+import Favorites from './Favorites'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import UnauthenticatedRoute from './UnauthenticatedRoute'
 
@@ -39,6 +40,10 @@ function App({ setAuthToken, setAuthLoaded }) {
           <UnauthenticatedRoute path="/signup">
             <Login screen="signup" />
           </UnauthenticatedRoute>
+
+          <AuthenticatedRoute path="/favorites">
+            <Favorites />
+          </AuthenticatedRoute>
 
           <AuthenticatedRoute path="/">
             <Home />

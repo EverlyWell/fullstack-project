@@ -23,17 +23,40 @@ import {
   InputBase,
   Typography,
 } from '@material-ui/core'
-import SearchIcon from '@material-ui/icons/Search'
+import {
+  Favorite as FavoriteIcon,
+  Home as HomeIcon,
+  Search as SearchIcon,
+} from '@material-ui/icons'
 import Alert from '@material-ui/lab/Alert'
 
 // Child Components
 import Image from './Image'
 
 const useStyles = makeStyles((theme) => ({
+  titleNav: {
+    width: 'auto',
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 2),
+    backgroundColor: '#f44336',
+  },
+  titleIcon: {
+    marginRight: theme.spacing(1),
+  },
+  navLink: {
+    padding: theme.spacing(0, 2),
+  },
   appBar: {
     flexDirection: 'row',
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(0, 2),
     justifyContent: 'space-between',
+  },
+  searchWrapper: {
+    padding: theme.spacing(1),
+    width: '40%',
   },
   search: {
     position: 'relative',
@@ -42,9 +65,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '50%',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -144,43 +164,57 @@ function Home({ authToken, setAuthToken }) {
     setImages(newImages)
   }
 
-  let imagesList
-  if(errorMessage) {
-    imagesList = <Alert severity="error">{errorMessage}</Alert>
-  } else {
-    imagesList = images.map((image) =>
-      <Image key={image.id} image={image} toggleImageFavorite={toggleImageFavorite} />
-    )
-  }
+  let imagesList = images.map((image) =>
+    <Image
+      key={image.source_id}
+      image={image}
+      toggleImageFavorite={toggleImageFavorite}
+      setError={setError}
+    />
+  )
 
   return (
     <Container data-testid="home-page">
       <AppBar position="fixed" className={classes.appBar}>
-        <Typography className={classes.title} variant="h6" noWrap>
-          Home
-        </Typography>
-
-        <div className={classes.search}>
-          <div className={classes.searchIcon}>
-            <SearchIcon />
-          </div>
-          <InputBase
-            placeholder="Search images..."
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-            onChange={searchImage}
-          />
-
-          {searching &&
-            <CircularProgress
-            className={classes.progress}
+        <Grid container direction="row" className={classes.titleNav}>
+          <Typography className={classes.title} variant="button" noWrap>
+            <HomeIcon className={classes.titleIcon} />
+            Home
+          </Typography>
+          <Button
+            href="/favorites"
             color="inherit"
-            size={20}
-          />
-          }
+            className={classes.navLink}
+            startIcon={<FavoriteIcon />}
+          >
+            Favorites
+          </Button>
+        </Grid>
+
+        <div className={classes.searchWrapper}>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+
+            <InputBase
+              placeholder="Search images..."
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={searchImage}
+            />
+
+            {searching &&
+              <CircularProgress
+              className={classes.progress}
+              color="inherit"
+              size={20}
+            />
+            }
+          </div>
         </div>
 
         <Button color="inherit" onClick={logout}>
