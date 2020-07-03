@@ -61,9 +61,10 @@ function Image({ image, setError, toggleImageFavorite, authToken }) {
         href='#'
         className={classes.favorite}
         onClick={toggleFavorite}
+        data-testid="toggle-favorite"
       >
         {image.favorite
-          ? <FavoriteIcon color='secondary' />
+          ? <FavoriteIcon color='secondary' data-testid="favorite-icon" />
           : <FavoriteOutlinedIcon className={classes.favoriteIcon} />
         }
       </Link>

@@ -6,8 +6,8 @@ import Cookies from 'js-cookie'
 import { createStore } from 'redux'
 import axios from 'axios'
 
-import Login from './Login'
-import reducer from './reducers/index'
+import Login from '../Login'
+import reducer from '../reducers/index'
 
 const email = 'test@example.com'
 const password = 'P@ssw0rd'
@@ -30,7 +30,7 @@ test('logins', async () => {
       <Provider store={store}>
         <Login />
       </Provider>
-    );
+    )
 
     fireEvent.change(screen.getByTestId('email-input'), { target: { value: email } })
     fireEvent.change(screen.getByTestId('password-input'), { target: { value: password } })
@@ -50,7 +50,7 @@ test('displays with error', async () => {
       <Provider store={store}>
         <Login />
       </Provider>
-    );
+    )
 
     fireEvent.change(screen.getByTestId('email-input'), { target: { value: email } })
     fireEvent.change(screen.getByTestId('password-input'), { target: { value: password } })
