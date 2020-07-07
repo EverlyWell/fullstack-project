@@ -10,7 +10,7 @@ Rails/React coding project for full-stack developer candidates
 - Spend no more than 4 hours coding for the project. Do not include any initial application setup in this time limit.
 
 ### Add-ons:
-- Login functionality
+- Sign up/log in functionality
 - Filter or search favorites
 
 ### Things we're looking for:
@@ -24,6 +24,13 @@ Rails/React coding project for full-stack developer candidates
 - Quality over quantity (the code you write should be good) 
 - Small, meaningful, commits
 - Cute animals
+
+## Submission:
+- __Fork__ this repository to your own git
+- Create a new branch to push your commits as you work
+- When complete, create a PR to the master branch (of your personal repo) so we can see the code that you added!
+- Somehow share your repository with us
+- __Important:__ If there are credentials required (.env or master.key file), please email these to us directly or we can’t review your project
 
 ## Setup:
 
