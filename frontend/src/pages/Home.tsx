@@ -6,6 +6,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Spinner from 'react-bootstrap/Spinner';
 import imageService from '../services/image';
 import useDebounce from '../hooks/useDebounce';
+import ImageContainer from '../components/ImageContainer';
 
 const Home: React.FC = () => {
   const [images, setImages] = useState({ data: [] });
@@ -56,9 +57,7 @@ const Home: React.FC = () => {
         }
 
         {images.data.map((image: any) => (
-          <Col xs={12} sm={6} md={4} className="justify-content-center align-self-center text-center p-2" key={image.id}>
-            <img src={image.images.fixed_height.url} alt='' />
-          </Col>
+          <ImageContainer key={image.id} image={image} />
         ))}
       </Row>
     </>
