@@ -25,6 +25,15 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# Use dotenv to store secrets in environment
+gem 'dotenv-rails', groups: [:development, :test]
+
+# Use faraday to call external APIs
+gem 'faraday'
+
+# Use oj to parse JSON, faster than json gem
+gem 'oj'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
