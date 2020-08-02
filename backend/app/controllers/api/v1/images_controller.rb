@@ -9,7 +9,7 @@ class Api::V1::ImagesController < ApplicationController
 
       render json: resp
     rescue => e
-      render json: e, status: 400
+      render json: e, status: :bad_request
     end
 
   end
