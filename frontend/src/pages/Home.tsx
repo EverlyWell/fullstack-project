@@ -9,7 +9,7 @@ import useDebounce from '../hooks/useDebounce';
 import ImageContainer from '../components/ImageContainer';
 
 const Home: React.FC = () => {
-  const [images, setImages] = useState({ data: [] });
+  const [images, setImages] = useState<any[]>([]);
   const [query, setQuery]= useState('');
   const [isSearching, setIsSearching] = useState(false);
   const debouncedQuery = useDebounce(query, 300);
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       if (debouncedQuery) {
-        setImages({ data: [] });
+        setImages([]);
         setIsSearching(true);
 
         const images = await imageService.get(`/images?q=${debouncedQuery}`);
@@ -27,12 +27,47 @@ const Home: React.FC = () => {
 
         setImages(images.data);
       } else {
-        setImages({ data: [] });
+        setImages([]);
       }
     }
 
     fetchData();
   }, [debouncedQuery]);
+
+  const onToggleFavorite = async (image: any) => {
+    let newId: null | number = null;
+    if (!image.favorite) {
+      try {
+        const resp = await imageService.post('/favorites', {
+          source_id: image.source_id
+        });
+
+        newId = resp.data.id;
+      } catch (e) {
+
+      }
+    } else {
+      try {
+        await imageService.delete(`/favorites/${image.id}`);
+      } catch (e) {
+
+      }
+    }
+
+    const mutatedImages = images.map((i: any) => {
+      if (i.source_id === image.source_id) {
+        return {
+          ...i,
+          id: newId,
+          favorite: !i.favorite
+        }
+      }
+
+      return i;
+    });
+
+    setImages(mutatedImages);
+  }
 
   return (
     <>
@@ -56,8 +91,11 @@ const Home: React.FC = () => {
           </Spinner>
         }
 
-        {images.data.map((image: any) => (
-          <ImageContainer key={image.id} image={image} />
+        {images.map((image: any) => (
+          <ImageContainer
+            key={image.source_id}
+            image={image}
+            onToggleFavorite={onToggleFavorite} />
         ))}
       </Row>
     </>

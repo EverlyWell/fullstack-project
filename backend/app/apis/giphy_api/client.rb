@@ -25,9 +25,9 @@ module GiphyApi
 
     def request(http_method:, endpoint:, params: {})
       response = client.public_send(http_method, endpoint, params)
-      parsed_response = Oj.load(response.body)
+      parsed_response = JSON.parse(response.body, :symbolize_names => true)
 
-      return parsed_response if request_successful?(response)
+      return parsed_response[:data] if request_successful?(response)
 
       raise error_class(response), "HTTP Code: #{response.status}, response: #{response.body}"
     end
