@@ -36,37 +36,34 @@ const Home: React.FC = () => {
 
   const onToggleFavorite = async (image: any) => {
     let newId: null | number = null;
-    if (!image.favorite) {
-      try {
+    try {
+      if (!image.favorite) {
         const resp = await imageService.post('/favorites', {
-          source_id: image.source_id
+          source_id: image.source_id,
+          url: image.url
         });
 
         newId = resp.data.id;
-      } catch (e) {
-
-      }
-    } else {
-      try {
+      } else {
         await imageService.delete(`/favorites/${image.id}`);
-      } catch (e) {
-
       }
-    }
 
-    const mutatedImages = images.map((i: any) => {
-      if (i.source_id === image.source_id) {
-        return {
-          ...i,
-          id: newId,
-          favorite: !i.favorite
+      const mutatedImages = images.map((i: any) => {
+        if (i.source_id === image.source_id) {
+          return {
+            ...i,
+            id: newId,
+            favorite: !i.favorite
+          }
         }
-      }
 
-      return i;
-    });
+        return i;
+      });
 
-    setImages(mutatedImages);
+      setImages(mutatedImages);
+    } catch (e) {
+
+    }
   }
 
   return (

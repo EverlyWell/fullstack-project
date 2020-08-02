@@ -29,6 +29,6 @@ class Api::V1::FavoritesController < ApplicationController
   private
 
   def create_params
-    params.permit(:source_id)
+    params.permit(:source_id, :url)
   end
 end
