@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get 'images', to: 'images#index'
       post 'authenticate', to: 'authentication#authenticate'
       post 'register', to: 'authentication#register'
+      resources :favorites, only: %i[index create destroy]
     end
   end
 end
