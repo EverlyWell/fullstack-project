@@ -16,9 +16,9 @@ class Api::V1::FavoritesController < ApplicationController
     end
   end
 
-  # DELETE /api/v1/favorites
+  # DELETE /api/v1/favorites/:id
   def destroy
-    favorite_image = current_user.favorite_images.find(destroy_params)
+    favorite_image = current_user.favorite_images.find(params[:id])
     favorite_image.destroy
 
     render json: {}, status: :ok
@@ -29,10 +29,6 @@ class Api::V1::FavoritesController < ApplicationController
   private
 
   def create_params
-    params.require(:image).permit(:source_id)
-  end
-
-  def destroy_params
-    params.permit(:id)
+    params.permit(:source_id)
   end
 end
