@@ -56,8 +56,8 @@ const Home: React.FC = () => {
         }
 
         {images.data.map((image: any) => (
-          <Col xs={12} sm={6} md={4} className="justify-content-center align-self-center text-center p-2">
-            <img key={image.id} src={image.images.fixed_height.url} alt='' />
+          <Col xs={12} sm={6} md={4} className="justify-content-center align-self-center text-center p-2" key={image.id}>
+            <img src={image.images.fixed_height.url} alt='' />
           </Col>
         ))}
       </Row>

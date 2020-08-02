@@ -3,24 +3,37 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
-import HeaderWithRouter from './components/Header';
+import * as Cookies from 'js-cookie';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
+import AuthenticatedRoute from './routes/AuthenticatedRoute';
+import Login from './pages/Login';
+import { useDispatch } from 'react-redux';
+import { updateToken } from './store/auth/actions';
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const token = Cookies.get('userToken');
+
+  if (token) {
+    dispatch(updateToken(token));
+  }
+
   return (
     <div className="app">
       <Router>
-        <Fragment>
-          <HeaderWithRouter />
-          <Container>
-            <Route path="/home" exact component={Home} />
-            <Route path="/favorites" exact component={Favorites} />
-          </Container>
-        </Fragment>
+        <Switch>
+          <AuthenticatedRoute path="/home">
+            <Home />
+          </AuthenticatedRoute>
+          <AuthenticatedRoute path="/favorites">
+            <Favorites />
+          </AuthenticatedRoute>
+          <Route path="/login" exact component={Login} />
+        </Switch>
       </Router>
     </div>
   );
