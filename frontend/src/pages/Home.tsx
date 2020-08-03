@@ -12,6 +12,7 @@ const Home: React.FC = () => {
   const [images, setImages] = useState<any[]>([]);
   const [query, setQuery]= useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [page, setPage] = useState(1);
   const debouncedQuery = useDebounce(query, 300);
 
   // Since image results are local to this page, let's just use local state vs redux store.
@@ -21,18 +22,18 @@ const Home: React.FC = () => {
         setImages([]);
         setIsSearching(true);
 
-        const images = await imageService.get(`/images?q=${debouncedQuery}`);
+        const newImages = await imageService.get(`/images?q=${debouncedQuery}&page=${page}`);
 
         setIsSearching(false);
 
-        setImages(images.data);
+        setImages(images => [...images, ...newImages.data]);
       } else {
         setImages([]);
       }
     }
 
     fetchData();
-  }, [debouncedQuery]);
+  }, [debouncedQuery, page]);
 
   const onToggleFavorite = async (image: any) => {
     let newId: null | number = null;
@@ -87,7 +88,6 @@ const Home: React.FC = () => {
             <span className="sr-only">Loading...</span>
           </Spinner>
         }
-
         {images.map((image: any) => (
           <ImageContainer
             key={image.source_id}

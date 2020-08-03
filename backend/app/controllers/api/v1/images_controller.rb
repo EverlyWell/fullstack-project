@@ -1,11 +1,16 @@
 class Api::V1::ImagesController < ApplicationController
+  PAGE_LIMIT = 20
 
   # GET /api/v1/images
   def index
     giphy_api_client = GiphyApi::Client.new
 
+    page = params[:page].to_i.positive? ? params[:page].to_i : 1
+    offset = (page - 1) * PAGE_LIMIT
+    q = params[:q]
+
     begin
-      @images = giphy_api_client.image_search(search_params)
+      @images = giphy_api_client.image_search({ q: q, offset: offset, limit: PAGE_LIMIT })
 
       render json: normalize_images
     rescue => e
@@ -17,7 +22,7 @@ class Api::V1::ImagesController < ApplicationController
   private
 
   def search_params
-    params.permit(:q)
+    params.permit(:q, :page)
   end
 
   def normalize_images
