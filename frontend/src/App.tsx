@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import ImagesList from './components/ImagesList';
 import axios from "axios";
@@ -6,6 +6,10 @@ import axios from "axios";
 function App() {
     const [images, setImages] = useState([]);
     const [query, setQuery] = useState('');
+
+    useEffect(()=>{
+        loadImages();
+    }, [])
 
     const loadImages = () => {
         axios.get('/api/images', {params: {sSearch: query}})
@@ -23,10 +27,11 @@ function App() {
 
     return (
         <div className="App">
-            <form onSubmit={handleSubmit}>
-                <textarea value={query} onChange={handleChange} />
-                <input type="submit" value="Submit" />
+            <form className="SearchBar" onSubmit={handleSubmit}>
+                <input value={query} onChange={handleChange} />
+                <input type="submit" value="Search" />
             </form>
+            <hr/>
             <ImagesList images={images}/>
         </div>
   );
