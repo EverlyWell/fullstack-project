@@ -1,5 +1,5 @@
 class Api::ImagesController < ApplicationController
   def index
-    logger.info '~~~~~~~~~~'
+    render json: CatAPI.new.search(term: params[:sSearch])
   end
 end
