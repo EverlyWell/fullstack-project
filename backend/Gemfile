@@ -29,7 +29,7 @@ gem 'faraday'
 gem 'oj'
 gem 'awesome_print'
 gem 'devise'
-gem 'knock'
+gem 'knock', git: 'https://github.com/nsarno/knock', branch: 'master', ref: '9214cd027422df8dc31eb67c60032fbbf8fc100b'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
