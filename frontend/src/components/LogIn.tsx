@@ -1,17 +1,21 @@
 import React, {useRef, useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {LoginProps} from "../types";
 
-// @ts-ignore
-const Login = ({ loggedIn, setLoggedIn}) =>{
-    const emailInput:any = useRef(null);
-    const pwdInput:any = useRef(null);
+const Login: React.FunctionComponent<LoginProps> = ({ loggedIn, setLoggedIn}) =>{
+    const emailInput = useRef<HTMLInputElement>(null);
+    const pwdInput = useRef<HTMLInputElement>(null);
     console.log(loggedIn);
 
     const handleLogin = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        const email = emailInput.current.value;
-        const password = pwdInput.current.value;
+
+        let email = '';
+        if(emailInput.current) email = emailInput.current.value;
+        let password = '';
+        if(pwdInput.current) password = pwdInput.current.value;
+
         try{
             const res = await axios.post('/api/user_token', {auth: {email, password}})
             if(res.data.jwt){
@@ -30,11 +34,11 @@ const Login = ({ loggedIn, setLoggedIn}) =>{
 
     if(loggedIn){
         return (
-            <input type="submit" onClick={handleLogout} value="Logout" />
+            <input className={'Logout'} type="submit" onClick={handleLogout} value="Logout" />
         );
     } else {
         return (
-            <form onSubmit={handleLogin}>
+            <form className={'Login'} onSubmit={handleLogin}>
                 <div> email: <input name='email' ref={emailInput} defaultValue=''/></div>
                 <div> password: <input name='password' type="password" ref={pwdInput} defaultValue=''/></div>
                 <div><input type="submit" value="Login" /></div>

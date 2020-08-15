@@ -63,5 +63,14 @@
   margin: 50px;
 }
 .hidden {
-  display: hidden;
+  display: none;
+}
+.LoginContainer {
+  margin-top:10px;
+}
+.Login{
+
+}
+.Logout{
+  float: right;
 }
