@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_08_14_143839) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["identifier", "user_id"], name: "index_favorites_on_identifier_and_user_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
