@@ -6,7 +6,6 @@ import {LoginProps} from "../types";
 const Login: React.FunctionComponent<LoginProps> = ({ loggedIn, setLoggedIn}) =>{
     const emailInput = useRef<HTMLInputElement>(null);
     const pwdInput = useRef<HTMLInputElement>(null);
-    console.log(loggedIn);
 
     const handleLogin = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();

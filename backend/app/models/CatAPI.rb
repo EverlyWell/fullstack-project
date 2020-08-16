@@ -1,5 +1,5 @@
 class CatAPI
-  API_ENDPOINT = 'https://api.thecatapi.com/v1/images'.freeze
+  API_ENDPOINT = 'https://api.thecatapi.com/v1'.freeze
   DEFAULT_LIMIT = 10
   DEFAULT_SIZE = 'full'
   attr_reader :conn
@@ -13,13 +13,24 @@ class CatAPI
     )
   end
 
-  def search(**query)
+  def search(query)
     params = { limit: DEFAULT_LIMIT, size: DEFAULT_SIZE }. merge(query)
-    res = conn.get('search') do |req|
+    Rails.logger.info "~~~~~~#{params}"
+    res = conn.get('images/search') do |req|
       req.params = req.params.merge(params)
       req.headers['Accept'] = 'application/json'
     end
     extract_data(res)
+  end
+  
+  def get_breeds
+    res = conn.get('breeds'){|req| req.headers['Accept'] = 'application/json'}
+    Oj.load(res.body).map{|o| [o['id'], o['name']]}.to_h
+  end
+
+  def get_categories
+    res = conn.get('categories'){|req| req.headers['Accept'] = 'application/json'}
+    Oj.load(res.body).map{|o| [o['id'], o['name']]}.to_h
   end
 
   private

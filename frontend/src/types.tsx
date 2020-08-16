@@ -1,6 +1,7 @@
 export interface Image{
     url:string,
-    id: string
+    id: string,
+    liked: boolean,
 }
 
 export interface ImageListProps {
@@ -19,11 +20,11 @@ export interface LoginProps {
 
 
 export interface ImageFiltersProps {
-    loadImages: (filters: Filters)=>void
+    loadImages: (filters:Filters)=>void
 }
 
 export interface Filters{
-    breed: string,
-    type: string,
-    category: string
+    breed_id?: string,
+    type_id?: string,
+    category_ids?: string
 }

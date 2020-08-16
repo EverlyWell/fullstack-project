@@ -73,4 +73,23 @@
 }
 .Logout{
   float: right;
+  margin-right: 50px;
 }
+.ImageDiv {
+  position: relative;
+}
+
+.ImageDiv i{
+  position: absolute;
+  right: 0px;
+  color: blue;
+  font-size: 36px;
+}
+.ImageDiv i:hover{
+  color: orangered;
+  cursor: pointer;
+}
+i.Liked {
+  color: red;
+}
+
