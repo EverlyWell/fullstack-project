@@ -6,4 +6,11 @@ class Favorite < ApplicationRecord
   end
 
   validates :identifier, uniqueness: { scope: :user_id }
+
+  def as_json(options = {})
+    super(options).merge({
+                             'fav_id' => id,
+                             'id' => identifier
+                         })
+  end
 end

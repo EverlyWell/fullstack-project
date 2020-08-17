@@ -14,7 +14,7 @@ const ImageFilters:React.FunctionComponent<ImageFiltersProps> = ({loadImages}) =
         let category_ids = '';
         if(breedSelect.current) breed_id = breedSelect.current.value;
         if(categorySelect.current) category_ids = categorySelect.current.value;
-        loadImages({breed_id, category_ids});
+        loadImages('api/images',{breed_id, category_ids});
     }
 
     useEffect(()=>{
@@ -24,20 +24,27 @@ const ImageFilters:React.FunctionComponent<ImageFiltersProps> = ({loadImages}) =
         axios.get(categoriesReq).then((res) => {setCategories(res.data);})
     },[])
 
+    const showFav = () =>{
+        loadImages('api/favorite', {})
+    }
+
     return (
-        <form className="SearchBar" onSubmit={handleSubmit}>
-           <span> Category: </span>
-            <select name="category" id="category" ref={categorySelect}>
-                <option value=''>All</option>
-                {categories.map(({id, name})=><option  key={id} value={id}>{name}</option>)}
-            </select>
-            <span>Breed: </span>
-            <select defaultValue='' name="breed" id="breed" ref={breedSelect} >
-                <option value=''>All</option>
-                {breeds.map(({id, name})=><option key={id} value={id}>{name}</option>)}
-            </select>
-            <input type="submit" value="Apply" />
-        </form>
+        <div>
+            <button onClick={showFav}>Show My Favorites</button>
+            <form className="SearchBar" onSubmit={handleSubmit}>
+                <span> Category: </span>
+                <select name="category" id="category" ref={categorySelect}>
+                    <option value=''>All</option>
+                    {categories.map(({id, name})=><option  key={id} value={id}>{name}</option>)}
+                </select>
+                <span>Breed: </span>
+                <select defaultValue='' name="breed" id="breed" ref={breedSelect} >
+                    <option value=''>All</option>
+                    {breeds.map(({id, name})=><option key={id} value={id}>{name}</option>)}
+                </select>
+                <input type="submit" value="Apply" />
+            </form>
+        </div>
     );
 }
 export default ImageFilters;

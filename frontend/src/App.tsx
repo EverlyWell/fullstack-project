@@ -14,7 +14,6 @@ function App() {
     useEffect(()=>{
         const jwt = Cookies.get('jwt');
         if(jwt!==undefined){
-            console.log('status: logged in');
             setLoggedIn(true);
             loadImages();
         } else {
@@ -22,8 +21,8 @@ function App() {
         }
     }, [])
 
-    const loadImages = async (filters?: Filters) => {
-       const res = await axios.get('/api/images',
+    const loadImages = async (url: string = 'api/images', filters: Filters = {}) => {
+       const res = await axios.get(url,
            {params: filters, headers: {'Authorization': `Bearer ${Cookies.get('jwt')}`}
        });
        setImages(res.data);

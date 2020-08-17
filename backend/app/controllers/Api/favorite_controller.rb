@@ -9,6 +9,11 @@ class Api::FavoriteController < ApplicationController
     end
   end
 
+  def index
+    favs = Favorite.where(user: current_user)
+    render json: favs.as_json(except: 'identifier')
+  end
+
   def destroy
     fav =  Favorite.find_by_id(params[:id])
     if fav&.destroy
