@@ -25,7 +25,9 @@ const ImageFilters:React.FunctionComponent<ImageFiltersProps> = ({loadImages}) =
     },[])
 
     const showFav = () =>{
-        loadImages('api/favorite', {})
+        if(breedSelect.current) breedSelect.current.value = '';
+        if(categorySelect.current) categorySelect.current.value = '';
+        loadImages('api/favorite', {});
     }
 
     return (
