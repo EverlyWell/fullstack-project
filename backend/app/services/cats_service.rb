@@ -2,31 +2,32 @@ require 'rest-client'
 
 module CatsService
 
+  BASE_URL = "https://api.thecatapi.com/v1"
+  SEARCH_URL = "#{BASE_URL}/images/search?"
+
   def self.breeds
-    url = "https://api.thecatapi.com/v1/breeds"
+    url = "#{BASE_URL}/breeds"
     fetch(url)
   end
 
   def self.categories
-    url = "https://api.thecatapi.com/v1/categories"
+    url = "#{BASE_URL}/categories"
     fetch(url)
   end
-
+  
   def self.search(breed_id, category_id, limit)
-    base_url = "https://api.thecatapi.com/v1/images/search?"
     params = "category_ids=#{category_id}&breed_id=#{breed_id}&limit=#{limit}"
-    fetch(base_url + params)
+    fetch(SEARCH_URL + params)
   end
 
   def self.search_by_breed(breed_id, limit)
-    base_url = "https://api.thecatapi.com/v1/images/search?"
     params = "breed_ids=#{breed_id}&limit=#{limit}&size=small"
-    fetch(base_url + params)
+    fetch(SEARCH_URL + params)
   end
 
   def self.my_favorites
     # WIP
-    url = "https://api.thecatapi.com/v1/favourites"
+    url = "#{BASE_URL}/favourites"
     fetch(url)
   end
 
