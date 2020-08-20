@@ -1,7 +1,7 @@
 module Api
   class GiphyController < ApiController
     def search
-      render json: {}
+      render json: []
     end
   end
 end

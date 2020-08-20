@@ -6,5 +6,10 @@ RSpec.describe Api::GiphyController do
       get :search
       expect(response.status).to be(200)
     end
+
+    it 'returns array' do
+      get :search
+      expect(response.body).to eq('[]')
+    end
   end
 end
