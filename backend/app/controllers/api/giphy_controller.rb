@@ -1,7 +1,14 @@
 module Api
   class GiphyController < ApiController
     def search
-      render json: []
+      data = GiphySearcher.call(search_params[:q])
+      render json: data
+    end
+
+    private
+
+    def search_params
+      params.permit(:q)
     end
   end
 end

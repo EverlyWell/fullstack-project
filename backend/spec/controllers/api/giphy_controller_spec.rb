@@ -7,9 +7,11 @@ RSpec.describe Api::GiphyController do
       expect(response.status).to be(200)
     end
 
-    it 'returns array' do
-      get :search
-      expect(response.body).to eq('[]')
+    it 'returns giphy data hash' do
+      get :search, params: { q: 'spongebob' }
+      data = JSON.parse(response.body)['data']
+      puts data
+      expect(data).not_to be_empty
     end
   end
 end
