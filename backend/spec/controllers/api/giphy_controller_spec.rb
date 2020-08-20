@@ -19,7 +19,6 @@ RSpec.describe Api::GiphyController do
       get :search, params: { q: 'patrick star', offset: 25 }
       page_two_ids = JSON.parse(response.body)['data'].map { |g| g['id'] }
 
-      # array intersection should return false if no overlap
       expect(page_one_ids & page_two_ids).to be_empty
     end
   end
