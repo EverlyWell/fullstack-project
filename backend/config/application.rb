@@ -17,3 +17,9 @@ module Backend
     # the framework and any gems in your application.
   end
 end
+
+cors_hosts = ['localhost:3000', '127.0.0.1:3000']
+
+cors_hosts.each do |host|
+  Rails.application.config.hosts << host
+end
