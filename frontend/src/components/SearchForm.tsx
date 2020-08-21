@@ -17,8 +17,8 @@ const SearchForm = () => {
     const formElement = e.target as HTMLFormElement;
     const formData = new FormData(formElement);
     const q = formData.get('q') as string;
-    const data = await fetchGiphyData(q);
-    images.set(data.data);
+    const { data } = await fetchGiphyData(q);
+    images.set(data);
     setSubmitButtonText('Search');
   }
 

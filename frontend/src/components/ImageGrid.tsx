@@ -1,10 +1,20 @@
 import React from 'react';
 
-const ImageGrid = (props: any) => {
+import Image from './Image';
+
+const ImageGrid = ({images, favorites}: {images: Array<any>, favorites: Array<string>}) => {
   return (
     <div>
-      {props.images.map((image: any) => (
-        <img key={image.id} src={image.images.preview_gif.url} alt={image.title}></img>
+      {images.map((image: any) => (
+        <Image
+          key={image.id}
+          image={{
+            id: image.id,
+            url: image.images.preview_gif.url,
+            title: image.title,
+          }}
+          favorite={favorites.find(f => f == image.id) ? true : false}
+        />
       ))}
     </div>
   );

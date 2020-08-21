@@ -4,12 +4,16 @@ import './App.css';
 import ImageGrid from './components/ImageGrid';
 import SearchForm from './components/SearchForm';
 
-export const AppContext = React.createContext({images: { get: [], set: (a: any)=>{}}});
+export const AppContext = React.createContext({
+  images: {get: [], set: (a: any) => {}},
+});
 
 function App() {
   const [images, setImages] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const store = {
+    favorites: {get: favorites, set: setFavorites},
     images: {get: images, set: setImages},
   };
 
@@ -19,7 +23,7 @@ function App() {
         <SearchForm />
       </header>
       <main>
-        <ImageGrid images={images} />
+        <ImageGrid images={images} favorites={favorites} />
       </main>
     </AppContext.Provider>
   );
