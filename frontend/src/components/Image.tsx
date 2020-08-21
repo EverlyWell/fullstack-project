@@ -16,8 +16,17 @@ const Image = ({
 }) => {
   const {favorites} = useContext(AppContext);
   function handleClick(id: string) {
-    let oldFavorites = favorites.get();
-    let newFavorites = [...oldFavorites, id];
+    const oldFavorites = favorites.get();
+    let newFavorites = [];
+    const index = oldFavorites.findIndex(f => f === id);
+    if (index !== -1) {
+      newFavorites = [
+        ...oldFavorites.slice(0, index),
+        ...oldFavorites.slice(index + 1),
+      ];
+    } else {
+      newFavorites = [...oldFavorites, id];
+    }
     favorites.set(newFavorites);
   }
 
