@@ -5,7 +5,8 @@ import ImageGrid from './components/ImageGrid';
 import SearchForm from './components/SearchForm';
 
 export const AppContext = React.createContext({
-  images: {get: [], set: (a: any) => {}},
+  images: {get: () => [], set: (a: any) => {}},
+  favorites: {get: () => [], set: (a: any) => {}},
 });
 
 function App() {
@@ -13,8 +14,8 @@ function App() {
   const [favorites, setFavorites] = useState([]);
 
   const store = {
-    favorites: {get: favorites, set: setFavorites},
-    images: {get: images, set: setImages},
+    favorites: {get: () => favorites, set: setFavorites},
+    images: {get: () => images, set: setImages},
   };
 
   return (

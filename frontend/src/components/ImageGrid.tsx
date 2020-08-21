@@ -13,7 +13,7 @@ const ImageGrid = ({images, favorites}: {images: Array<any>, favorites: Array<st
             url: image.images.preview_gif.url,
             title: image.title,
           }}
-          favorite={favorites.find(f => f == image.id) ? true : false}
+          favorite={favorites.find(f => f === image.id) ? true : false}
         />
       ))}
     </div>

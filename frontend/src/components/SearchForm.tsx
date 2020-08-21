@@ -3,7 +3,6 @@ import {AppContext} from '../App';
 
 const SearchForm = () => {
   const { images } = useContext(AppContext);
-  console.log(images);
   const [submitButtonText, setSubmitButtonText] = useState('Search');
 
   async function fetchGiphyData(q: string) {
@@ -23,7 +22,7 @@ const SearchForm = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="search-form" onSubmit={handleSubmit}>
       <input type="text" name="q" placeholder="search" />
       <input type="submit" value={submitButtonText} />
     </form>
