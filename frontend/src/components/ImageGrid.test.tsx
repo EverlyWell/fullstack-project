@@ -9,5 +9,4 @@ describe('ImageGrid', () => {
 
     expect(messageElement).toBeInTheDocument();
   });
-
 });

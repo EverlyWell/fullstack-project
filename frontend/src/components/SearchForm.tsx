@@ -13,7 +13,7 @@ const SearchForm = () => {
   async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setSubmitButtonText('Searching...');
-    const formElement = e.target as HTMLFormElement;
+    const formElement = e.currentTarget as HTMLFormElement;
     const formData = new FormData(formElement);
     const q = formData.get('q') as string;
     const { data } = await fetchGiphyData(q);
