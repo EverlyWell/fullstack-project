@@ -1,8 +1,15 @@
 import React from 'react';
 
-function SearchForm() {
+const SearchForm = () => {
+  function handleSubmit(e: React.SyntheticEvent) {
+    e.preventDefault();
+    const formElement = e.target as HTMLFormElement;
+    const formData = new FormData(formElement);
+    console.log(formData.get('q'));
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input type="text" name="q" placeholder="search" />
       <input type="submit" value="Search" />
     </form>
