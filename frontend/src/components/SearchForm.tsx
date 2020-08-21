@@ -1,21 +1,25 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {AppContext} from '../App';
 
 const SearchForm = () => {
+  const { images } = useContext(AppContext);
+  console.log(images);
   const [submitButtonText, setSubmitButtonText] = useState('Search');
 
-  function fetchGiphyData(q: string) {
-    return fetch(`http://localhost:3010/api/search?q=${q}`);
+  async function fetchGiphyData(q: string) {
+    const data = await fetch(`http://localhost:3010/api/search?q=${q}`);
+    return data.json();
   }
 
-  function handleSubmit(e: React.SyntheticEvent) {
+  async function handleSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setSubmitButtonText('Searching...');
     const formElement = e.target as HTMLFormElement;
     const formData = new FormData(formElement);
     const q = formData.get('q') as string;
-    fetchGiphyData(q).then(data => {
-      console.log(data);
-    });
+    const data = await fetchGiphyData(q);
+    images.set(data.data);
+    setSubmitButtonText('Search');
   }
 
   return (
