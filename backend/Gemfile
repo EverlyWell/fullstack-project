@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
+# A search client for the Giphy image Api
+gem 'GiphyClient'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -48,6 +51,14 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  # Adds support for replaying HTTP requests (no need to hit the API directly)
+  gem 'vcr'
+  # Required for the VCR gem
+  gem 'webmock'
+  # Allows for use of 'focus' keyword to isolate a single test
+  gem 'minitest-focus'
+  # Adds additional methods useful for stubbing and mocking
+  gem 'mocha'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
