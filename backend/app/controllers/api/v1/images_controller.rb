@@ -8,13 +8,14 @@ module Api
           when :giphy
             giphy_service = Services::Giphy.new
             response = giphy_service.search(search_params[:query])
-            response.data = Services::Giphy.translate_data(response.data)
+            favorite_slugs = Favorite::Giphy.pluck(:slug)
+            response.data = Services::Giphy.translate_data(response.data, favorite_slugs)
           else
             # Implement search capabilities for the API, TheCatAPI, etc...
             raise ArgumentError.new "Source of type of: #{source} has not het been implemented."
         end
 
-        render json: { data: response.data }
+        respond_with({ data: response.data })
       end
 
       private

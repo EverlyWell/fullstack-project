@@ -2,7 +2,7 @@ module Api
   module V1
     class FavoritesController < ApplicationController
       def show
-        render json: Favorite::Base.all
+        respond_with Favorite::Base.all
       end
 
       def destroy

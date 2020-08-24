@@ -4,7 +4,7 @@ class FavoritesControllerTest < ActionDispatch::IntegrationTest
   test "show favorites" do
     favorite = Favorite::Giphy.create(slug: 'abc123')
 
-    get '/api/v1/favorites'
+    get '/api/v1/favorites?format=json'
 
     response_body = JSON.parse(response.body).first
     assert_equal favorite.slug, response_body['slug']

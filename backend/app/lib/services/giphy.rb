@@ -28,9 +28,9 @@ class Services::Giphy
     "https://media0.giphy.com/media/#{id}/100.gif"
   end
 
-  def self.translate_data(data)
+  def self.translate_data(data, favorited_slugs)
     data.map do |item|
-      { slug: item.id, thumbnail: thumbnail(item.id), source: 'Giphy' }
+      { slug: item.id, thumbnail: thumbnail(item.id), source: 'Giphy', isFavorite: favorited_slugs.include?(item.id) }
     end
   end
 end

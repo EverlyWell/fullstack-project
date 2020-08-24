@@ -19,10 +19,15 @@ class Services::GiphyTest < ActiveSupport::TestCase
       giphy_service = Services::Giphy.new
       giphy_search_response = giphy_service.search('kitty')
 
-      data = Services::Giphy.translate_data(giphy_search_response.data)
+      data = Services::Giphy.translate_data(giphy_search_response.data, [])
 
       assert expected_attributes.count, (data.first.keys & expected_attributes).count
     end
+  end
+
+  test 'giphy search result data has favorite flagged' do
+    data = Services::Giphy.translate_data([OpenStruct.new(id: 'abc123')], ['abc123'])
+    assert data.first[:isFavorite]
   end
 
   test '#thumbnail' do
