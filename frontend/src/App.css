@@ -13,3 +13,16 @@ input {
   font-size: 2em;
   width: 300px;
 }
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  -webkit-backdrop-filter: blur(6px);
+}
