@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # A search client for the Giphy image Api
 gem 'GiphyClient'
+# Provides use of respond_with from controllers
+gem 'responders'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
