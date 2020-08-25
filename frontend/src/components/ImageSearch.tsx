@@ -7,7 +7,7 @@ export default class ImageSearch extends Component<any, any> {
 
     this.state = {
       query: '',
-      items: []
+      items: this.props.items
     };
   }
 
@@ -26,9 +26,7 @@ export default class ImageSearch extends Component<any, any> {
   handleFavoriteChange = (slug: any) => {
   }
 
-  renderSearchResults = () => {
-    const { items } = this.state;
-
+  renderSearchResults = (items: any) => {
     if (items && items.length > 0) {
       let itemsList = items.map((item: any) => (
         <li key={item.slug}>
@@ -57,12 +55,13 @@ export default class ImageSearch extends Component<any, any> {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.query} onChange={this.handleQueryChange} />
+      <div className={"search"}>
+        <h2>Search for an image</h2>
+        <form role="search" onSubmit={this.handleSubmit}>
+          <input type="search" value={this.state.query} onChange={this.handleQueryChange} />
           <input type="submit" value="Image Search" />
         </form>
-        {this.renderSearchResults()}
+        {this.renderSearchResults(this.state.items)}
       </div>
     );
   }
