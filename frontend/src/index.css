@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 40px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +10,48 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* crude styling for very basic visuals */
+ul {
+  list-style: none;
+}
+
+li {
+  padding-right: 20px;
+  float: left;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+}
+
+.search {
+  padding-top: 20px;
+}
+
+.favorites ul {
+  float: left;
+  margin-right: -999em;
+  padding-left: 20px;
+}
+
+.favorites {
+  width: 100%;
+  height: 150px;
+
+  overflow: auto;
+  border: 1px solid;
+}
+
+.favorites li {
+  overflow: auto;
+  display: inline;
+  white-space: nowrap;
 }
