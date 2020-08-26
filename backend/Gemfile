@@ -32,10 +32,19 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'GiphyClient'
 # Provides use of respond_with from controllers
 gem 'responders'
+# Authentication via devise
+gem 'devise'
+# Niave JWT via devise
+gem 'devise-jwt', '~> 0.5.8'
+# devise-jwt breaks when the dry-configurable dependency is using latest
+gem 'dry-configurable', '0.9.0'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Utility that provides fake data
+  gem 'faker'
 end
 
 group :development do
