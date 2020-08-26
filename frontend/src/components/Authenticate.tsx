@@ -5,8 +5,8 @@ export default class Authenticate extends Component<any, any> {
     super(props);
 
     this.state = {
-      email: 'test@test.com',
-      password: 'testpass'
+      email: '',
+      password: ''
     };
   }
 

@@ -11,8 +11,6 @@ class Api::V1::SessionsControllerTest < ActionDispatch::IntegrationTest
     headers = { 'Accept' => 'application/json', 'Content-Type' => 'application/json' }
 
     post '/api/v1/login?format=json', headers: headers, params: { user: { email: @user.email, password: @password }}.to_json
-    puts response.body
-    puts response.headers
 
     assert response.headers["Authorization"].include?('Bearer')
     assert_response :success
