@@ -12,7 +12,11 @@ export default class ImageSearch extends Component<any, any> {
   }
 
   searchImages() {
-    fetch(`/api/v1/images/search.json?query=${this.state.query}`)
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${document.cookie.split('token=')[1]}` }
+    };
+
+    fetch(`/api/v1/images/search.json?query=${this.state.query}`, requestOptions)
       .then(res => res.json())
       .then(
         (result) => {

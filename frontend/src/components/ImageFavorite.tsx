@@ -12,7 +12,7 @@ export default class ImageFavorite extends Component<any, any> {
   setFavorite() {
     const requestOptions = {
       method: this.state.isFavorite ? 'DELETE' : 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${document.cookie.split('token=')[1]}` },
       body: JSON.stringify({ favorite: { slug: this.props.slug, type: `Favorite::${this.props.imageSource}` }})
     };
 

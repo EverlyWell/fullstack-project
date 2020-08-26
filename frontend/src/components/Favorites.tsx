@@ -12,7 +12,7 @@ export default class Favorites extends Component<any, any> {
 
   getFavorites() {
     const requestOptions = {
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${document.cookie.split('token=')[1]}` }
     };
 
     fetch("/api/v1/favorites", requestOptions)
