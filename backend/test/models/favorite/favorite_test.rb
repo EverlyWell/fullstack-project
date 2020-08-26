@@ -16,4 +16,12 @@ class GiphyFavoriteTest < ActiveSupport::TestCase
     favorite_giphy = Favorite::Giphy.create(slug: '138xg52sDwmNIA')
     assert 'Favorite::Giphy', favorite_giphy.source
   end
+
+  test 'Favorite is associated to User' do
+    expected_slug = Faker::Internet.slug
+    user = User.create(email: Faker::Internet.email, password: 'testpass')
+    user.favorites << Favorite::Giphy.create(slug: expected_slug)
+
+    assert_equal user, Favorite::Base.find_by(slug: expected_slug).user
+  end
 end
