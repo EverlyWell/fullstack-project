@@ -16,7 +16,8 @@ module CatsService
   end
   
   def self.search(breed_id, category_id, limit)
-    params = "category_ids=#{category_id}&breed_id=#{breed_id}&limit=#{limit}"
+    params = build_dynamic_params(breed_id, category_id, limit)
+    puts(SEARCH_URL + params)
     fetch(SEARCH_URL + params)
   end
 
@@ -37,6 +38,16 @@ module CatsService
     api_key = Rails.application.credentials[:cats_api]
     headers = { 'Content-Type': 'application/json', 'x-api-key': api_key }
     JSON.parse(RestClient.get(url, headers).body)
+  end
+
+  def self.build_dynamic_params(breed_id, category_id, limit)
+    if(category_id != 'none')
+      dynamic_params = "category_ids=#{category_id}"
+    else
+      dynamic_params = "breed_ids=#{breed_id}"
+    end
+    default_params = "&limit=#{limit}&mime_types=jpg,png&size=small"
+    dynamic_params + default_params
   end
 
 end
