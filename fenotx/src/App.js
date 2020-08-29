@@ -1,38 +1,15 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import './App.css';
-
-axios.defaults.baseURL = "http://localhost:3020/api/v1/cats"
+import * as services from './services/cats';
 
 class App extends Component {
 
-  async getBreeds() {
-    const res = await axios('/breeds');
-    return res.data;
-  }
-  async getCategories() {
-    const res = await axios('/categories');
-    return res.data;
-  }
-  async getCatsImagesByBreed(breed_id, amount) {
-    const res = await axios('/search_by_breed', { params: { breed_id: breed_id, limit: amount }});
-    return res.data;
-  }
-  async getCatsImages(breed_id, category_id, amount) {
-    const res = await axios('/search', {
-      params: { breed_id: breed_id, category_id: category_id, limit: amount }
-    });
-    return res.data;
-  }
-
   async loadBreedImages() {
-    let breed_images = '';
-    if(this.state.selected_category === 'none'){
-      breed_images = await this.getCatsImagesByBreed(this.state.selected_breed, 5);
-    }else{
-      breed_images = await this.getCatsImages(this.state.selected_breed, this.state.selected_category, 5);
-    }
+    let breed_images = await services.getCatsImages(
+      this.state.selected_breed, this.state.selected_category, 5
+    );
     this.setState({ images: breed_images });
+    this.setState({ loader: false })
   }
 
   constructor(...args) {
