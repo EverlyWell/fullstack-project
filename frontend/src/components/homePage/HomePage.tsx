@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Box, Paper, Input, makeStyles, IconButton } from "@material-ui/core";
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  Box,
+  Paper,
+  Input,
+  makeStyles,
+  IconButton,
+  Grid,
+  Button,
+} from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { PhotoGrid } from "./PhotoGrid";
 import axios from "axios";
+//@ts-ignore
+import { debounce } from "lodash";
 
 const useStyles = makeStyles((theme) => ({}));
-
-//TODO: store clientID in ENV
 
 export interface Photo {
   id: string;
@@ -17,7 +25,7 @@ export interface Photo {
 const getPhotos = async (q: string): Promise<Photo[]> => {
   const config = {
     headers: {
-      Authorization: `Client-ID ${clientId}`,
+      Authorization: `Client-ID ${process.env.REACT_APP_CLIENT_ID}`,
     },
   };
 
@@ -46,17 +54,31 @@ const getPhotos = async (q: string): Promise<Photo[]> => {
 export const HomePage = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    getPhotos(searchTerm).then((photos: any) => {
+  useEffect(() => {
+    setLoading(true);
+    getPhotos(debouncedSearchTerm).then((photos: any) => {
       setLoading(false);
       setPhotos(photos);
     });
+  }, [debouncedSearchTerm]);
+
+  const setDebouncedSearchTermCB = useCallback(
+    debounce((debouncedSearchTerm: string) => {
+      setDebouncedSearchTerm(debouncedSearchTerm);
+    }, 500),
+    []
+  );
+
+  const setTerms = (term: string) => {
+    setSearchTerm(term);
+    setDebouncedSearchTermCB(term);
   };
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+    setTerms(event.target.value);
   };
 
   return (
@@ -68,18 +90,48 @@ export const HomePage = () => {
             disableUnderline
             value={searchTerm}
             onChange={handleChangeInput}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) {
-                handleSearch();
-              }
-            }}
           />
-          <IconButton color="primary" onClick={handleSearch}>
+          <IconButton color="primary">
             <SearchIcon style={{ color: "grey" }} />
           </IconButton>
         </Box>
       </Paper>
-      <PhotoGrid loading={loading} photos={photos} />
+      {searchTerm ? (
+        <PhotoGrid loading={loading} photos={photos} />
+      ) : (
+        <div>
+          start typing to see photos or use one of these:
+          <Grid container>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  setTerms("cute puppies");
+                }}
+              >
+                Cute puppies
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  setTerms("cute kittens");
+                }}
+              >
+                Cute kittens
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                onClick={() => {
+                  setTerms("cute piglets");
+                }}
+              >
+                Cute piglets
+              </Button>
+            </Grid>
+          </Grid>
+        </div>
+      )}
     </Box>
   );
 };
