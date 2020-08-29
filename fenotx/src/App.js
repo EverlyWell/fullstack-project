@@ -52,40 +52,53 @@ class App extends Component {
   }
   render() {
     function Loader(props) {
-      return props.loaderState ? <div><h3>Loading...</h3></div> : "";
+      if(props.loaderState)
+        return <div><h3>Loading...</h3></div>
+      return (null);
+    }
+    function ImageDisplay(props){
+      if(!props.loaderState)
+        return props.images.map((image, i) => (
+          <img key={i} className="cat-image" alt="" src={image.url}></img>
+        ))
+      return (null);
+    }
+    function Select(props){
+      return(
+        <select
+          value={props.selected}
+          onChange={props.onSelectChange}
+        >
+          <option value='none'>None</option>
+          {
+            props.items.map((item) =>
+              <option key={item.id} value={item.id}>{item.name}</option>)
+          }
+        </select>
+      )
     }
 
     return (
       <div>
-        Breed:
-        <select
-          value={this.state.selected_breed}
-          onChange={this.onBreedSelectChange}
-        >
-          <option value='none'>None</option>
-          { this.state.breeds.map((breed) =>
-            <option key={breed.id} value={breed.id}>{breed.name}</option>)
-          }
-        </select>
+        <div className="controls">
+          Breed:
+          <Select
+            items={this.state.breeds}
+            selected={this.state.selected_breed}
+            onSelectChange={this.onBreedSelectChange} />
 
-        &nbsp;&nbsp;
+          &nbsp;&nbsp;
 
-        Category:
-        <select
-          value={this.state.selected_category}
-          onChange={this.onCategorySelectChange}
-        >
-          <option value='none'>None</option>
-          { this.state.categories.map((category) =>
-            <option key={category.id} value={category.id}>{category.name}</option>)
-          }
-        </select>
+          Category:
+          <Select
+            items={this.state.categories}
+            selected={this.state.selected_category}
+            onSelectChange={this.onCategorySelectChange} />
+        </div>
 
         <div className="images">
           <Loader loaderState={this.state.loader} />
-          { this.state.images.map((image, i) => (
-            <img key={i} className="cat-image" alt="" src={image.url}></img>
-          ))}
+          <ImageDisplay images={this.state.images} loaderState={this.state.loader} />
         </div>
 
       </div>
