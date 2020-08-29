@@ -7,6 +7,8 @@ import {
   IconButton,
   Grid,
   Button,
+  Typography,
+  Divider,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { PhotoGrid } from "./PhotoGrid";
@@ -86,7 +88,7 @@ export const HomePage = () => {
   return (
     <Box>
       <Paper>
-        <Box>
+        <Box style={{ padding: "10px" }}>
           <Input
             placeholder="search"
             disableUnderline
@@ -96,17 +98,26 @@ export const HomePage = () => {
           <IconButton color="primary">
             <SearchIcon style={{ color: "grey" }} />
           </IconButton>
-          <Button onClick={() => setFavoritesOpen(true)}>view favorites</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => setFavoritesOpen(true)}
+          >
+            view favorites
+          </Button>
         </Box>
       </Paper>
       {searchTerm ? (
         <PhotoGrid loading={loading} photos={photos} />
       ) : (
         <div>
-          start typing to see photos or use one of these:
-          <Grid container>
+          <Typography style={{ padding: "30px" }}>
+            start typing to see photos or use one of these:
+          </Typography>
+          <Grid container spacing={5} justify="center" alignItems="center">
             <Grid item>
               <Button
+                variant="contained"
                 onClick={() => {
                   setTerms("cute puppies");
                 }}
@@ -116,6 +127,7 @@ export const HomePage = () => {
             </Grid>
             <Grid item>
               <Button
+                variant="contained"
                 onClick={() => {
                   setTerms("cute kittens");
                 }}
@@ -125,6 +137,7 @@ export const HomePage = () => {
             </Grid>
             <Grid item>
               <Button
+                variant="contained"
                 onClick={() => {
                   setTerms("cute piglets");
                 }}
