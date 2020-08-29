@@ -13,6 +13,7 @@ import { PhotoGrid } from "./PhotoGrid";
 import axios from "axios";
 //@ts-ignore
 import { debounce } from "lodash";
+import { FavoritesDialog } from "../favoritesDialog/FavoritesDialog";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -56,6 +57,7 @@ export const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+  const [favoritesOpen, setFavoritesOpen] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -94,6 +96,7 @@ export const HomePage = () => {
           <IconButton color="primary">
             <SearchIcon style={{ color: "grey" }} />
           </IconButton>
+          <Button onClick={() => setFavoritesOpen(true)}>view favorites</Button>
         </Box>
       </Paper>
       {searchTerm ? (
@@ -132,6 +135,7 @@ export const HomePage = () => {
           </Grid>
         </div>
       )}
+      <FavoritesDialog open={favoritesOpen} setOpen={setFavoritesOpen} />
     </Box>
   );
 };
