@@ -19,6 +19,7 @@ class App extends Component {
         images: [],
         breeds: [],
         categories: [],
+        loader: false,
         selected_breed: 'abys',
         selected_category: 'none',
     };
@@ -27,19 +28,21 @@ class App extends Component {
     this.onCategorySelectChange = this.onCategorySelectChange.bind(this);
   }
   async onBreedSelectChange(e) {
-    await this.setState({selected_breed: e.target.value});
+    this.setState({ loader: true })
+    await this.setState({ selected_breed: e.target.value });
     await this.loadBreedImages();
   }
   async onCategorySelectChange(e) {
-    await this.setState({selected_category: e.target.value});
+    this.setState({ loader: true })
+    await this.setState({ selected_category: e.target.value });
     await this.loadBreedImages();
   }
   componentDidMount() {
     if (this.state.breeds.length===0) {
       (async () => {
         try {
-          this.setState({ breeds: await this.getBreeds() });
-          this.setState({ categories: await this.getCategories() });
+          this.setState({ breeds: await services.getBreeds() });
+          this.setState({ categories: await services.getCategories() });
         } catch (e) {
           //...handle the error...
           console.error(e)
@@ -48,6 +51,10 @@ class App extends Component {
     }
   }
   render() {
+    function Loader(props) {
+      return props.loaderState ? <div><h3>Loading...</h3></div> : "";
+    }
+
     return (
       <div>
         Breed:
@@ -55,8 +62,10 @@ class App extends Component {
           value={this.state.selected_breed}
           onChange={this.onBreedSelectChange}
         >
+          <option value='none'>None</option>
           { this.state.breeds.map((breed) =>
-            <option key={breed.id} value={breed.id}>{breed.name}</option>) }
+            <option key={breed.id} value={breed.id}>{breed.name}</option>)
+          }
         </select>
 
         &nbsp;&nbsp;
@@ -68,10 +77,12 @@ class App extends Component {
         >
           <option value='none'>None</option>
           { this.state.categories.map((category) =>
-            <option key={category.id} value={category.id}>{category.name}</option>) }
+            <option key={category.id} value={category.id}>{category.name}</option>)
+          }
         </select>
 
         <div className="images">
+          <Loader loaderState={this.state.loader} />
           { this.state.images.map((image, i) => (
             <img key={i} className="cat-image" alt="" src={image.url}></img>
           ))}
