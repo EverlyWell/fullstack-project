@@ -1,29 +1,46 @@
 import React, { useState, useEffect } from "react";
-import { Box, Paper, Input, makeStyles } from "@material-ui/core";
+import { Box, Paper, Input, makeStyles, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { PhotoGrid } from "./PhotoGrid";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({}));
 
-const mockPhotoOne = {
-  url: "https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png",
-};
-
-const mockPhotoTwo = {
-  url:
-    "https://www.humanesociety.org/sites/default/files/styles/1240x698/public/2020-07/kitten-510651.jpg?h=f54c7448&itok=ZhplzyJ9",
-};
-
-const mockPhotos = [mockPhotoOne, mockPhotoTwo];
+//TODO: store clientID in ENV
 
 export interface Photo {
+  id: string;
   url: string;
   favorited?: boolean;
 }
 
-const getPhotos = async (): Promise<Photo[]> => {
-  //todo call API for getting photos
-  return mockPhotos;
+const getPhotos = async (q: string): Promise<Photo[]> => {
+  const config = {
+    headers: {
+      Authorization: `Client-ID ${clientId}`,
+    },
+  };
+
+  const url = `https://api.imgur.com/3/gallery/search/?q=${q}&mature=false`;
+  const res = await axios.get(url, config);
+  console.log("res,", res);
+  const photos: Photo[] = [];
+
+  const parsedRes = res.data.data.forEach((item: any) => {
+    if (item.is_album) {
+      item.images.forEach((photo: any) => {
+        photos.push({
+          id: photo.id,
+          url: photo.link,
+        });
+      });
+    }
+  });
+
+  console.log("parsedRes", parsedRes);
+  console.log("photos", photos);
+
+  return photos;
 };
 
 export const HomePage = () => {
@@ -31,14 +48,12 @@ export const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!searchTerm) return;
-    setLoading(true);
-    getPhotos().then((photos: any) => {
+  const handleSearch = () => {
+    getPhotos(searchTerm).then((photos: any) => {
       setLoading(false);
       setPhotos(photos);
     });
-  }, [searchTerm]);
+  };
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -53,8 +68,15 @@ export const HomePage = () => {
             disableUnderline
             value={searchTerm}
             onChange={handleChangeInput}
-            endAdornment={<SearchIcon style={{ color: "grey" }} />}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                handleSearch();
+              }
+            }}
           />
+          <IconButton color="primary" onClick={handleSearch}>
+            <SearchIcon style={{ color: "grey" }} />
+          </IconButton>
         </Box>
       </Paper>
       <PhotoGrid loading={loading} photos={photos} />

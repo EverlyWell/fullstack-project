@@ -14,7 +14,7 @@ export const PhotoGrid = ({ photos, loading }: Props) => {
     <div>
       Here are your pictures:
       {photos.map((photo) => (
-        <img src={photo.url} />
+        <img key={photo.id} src={photo.url} />
       ))}
     </div>
   );
