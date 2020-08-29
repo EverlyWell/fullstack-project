@@ -41,3 +41,8 @@
   width: 400px;
   border: 1px solid red;
 }
+.controls {
+  background-color: #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
