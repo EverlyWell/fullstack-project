@@ -76,6 +76,7 @@ GEM
     crass (1.0.6)
     erubi (1.9.0)
     ffi (1.13.1)
+    ffi (1.13.1-x64-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.3)
@@ -98,10 +99,14 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     msgpack (1.3.3)
+    msgpack (1.3.3-x64-mingw32)
     nio4r (2.5.2)
     nokogiri (1.10.9)
       mini_portile2 (~> 2.4.0)
+    nokogiri (1.10.9-x64-mingw32)
+      mini_portile2 (~> 2.4.0)
     pg (1.2.3)
+    pg (1.2.3-x64-mingw32)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -146,6 +151,8 @@ GEM
       sassc-rails (~> 2.1, >= 2.1.1)
     sassc (2.4.0)
       ffi (~> 1.9)
+    sassc (2.4.0-x64-mingw32)
+      ffi (~> 1.9)
     sassc-rails (2.1.2)
       railties (>= 4.0.0)
       sassc (>= 2.0)
@@ -174,6 +181,8 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2020.1)
+      tzinfo (>= 1.0.0)
     web-console (4.0.3)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -196,6 +205,7 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
@@ -217,7 +227,7 @@ DEPENDENCIES
   webpacker (~> 4.0)
 
 RUBY VERSION
-   ruby 2.5.1p57
+   ruby 2.6.6p146
 
 BUNDLED WITH
    2.1.4
