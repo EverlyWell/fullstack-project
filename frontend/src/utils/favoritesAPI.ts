@@ -12,10 +12,8 @@ export interface Favorite {
 }
 
 export const getFavorites = async (user_id: string): Promise<Favorite> => {
-  console.log("getting favs");
   const url = `http://localhost:3010/api/favorites/?user_id=${user_id}`;
   const { data } = await axios.get(url);
-  console.log("res from getfavs", data);
   const favs = {};
   Object.entries(data).forEach(([key, value]) => {
     //@ts-ignore

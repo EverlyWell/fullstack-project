@@ -10,7 +10,6 @@ interface Props {
 
 export const FavoritesDialog = ({ open, setOpen, favorites }: Props) => {
   const handleClose = () => setOpen(false);
-  console.log("here are the favs you wanted", favorites);
   return (
     <Dialog fullWidth maxWidth={"lg"} onClose={handleClose} open={open}>
       <DialogTitle>Favorites</DialogTitle>
