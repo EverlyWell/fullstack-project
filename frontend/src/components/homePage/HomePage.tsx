@@ -3,12 +3,10 @@ import {
   Box,
   Paper,
   Input,
-  makeStyles,
   IconButton,
   Grid,
   Button,
   Typography,
-  Divider,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { PhotoGrid } from "./PhotoGrid";
@@ -16,8 +14,8 @@ import axios from "axios";
 //@ts-ignore
 import { debounce } from "lodash";
 import { FavoritesDialog } from "../favoritesDialog/FavoritesDialog";
-
-const useStyles = makeStyles((theme) => ({}));
+import { getUserId } from "../../utils/userManagement";
+import { getFavorites, Favorite } from "../../utils/favoritesAPI";
 
 export interface Photo {
   id: string;
@@ -34,10 +32,9 @@ const getPhotos = async (q: string): Promise<Photo[]> => {
 
   const url = `https://api.imgur.com/3/gallery/search/?q=${q}&mature=false`;
   const res = await axios.get(url, config);
-  console.log("res,", res);
   const photos: Photo[] = [];
 
-  const parsedRes = res.data.data.forEach((item: any) => {
+  res.data.data.forEach((item: any) => {
     if (item.is_album) {
       item.images.forEach((photo: any) => {
         photos.push({
@@ -47,19 +44,26 @@ const getPhotos = async (q: string): Promise<Photo[]> => {
       });
     }
   });
-
-  console.log("parsedRes", parsedRes);
-  console.log("photos", photos);
-
   return photos;
 };
 
 export const HomePage = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
+  const [favorites, setFavorites] = useState<Favorite>({});
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
   const [favoritesOpen, setFavoritesOpen] = useState(false);
+  const userId = getUserId() as string;
+
+  const refreshFavorites = () => {
+    getFavorites(userId).then((f) => {
+      setFavorites(f);
+    });
+  };
+  useEffect(() => {
+    refreshFavorites();
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -108,7 +112,12 @@ export const HomePage = () => {
         </Box>
       </Paper>
       {searchTerm ? (
-        <PhotoGrid loading={loading} photos={photos} />
+        <PhotoGrid
+          loading={loading}
+          photos={photos}
+          favorites={favorites}
+          refreshFavorites={refreshFavorites}
+        />
       ) : (
         <div>
           <Typography style={{ padding: "30px" }}>
@@ -148,7 +157,11 @@ export const HomePage = () => {
           </Grid>
         </div>
       )}
-      <FavoritesDialog open={favoritesOpen} setOpen={setFavoritesOpen} />
+      <FavoritesDialog
+        open={favoritesOpen}
+        setOpen={setFavoritesOpen}
+        favorites={favorites}
+      />
     </Box>
   );
 };

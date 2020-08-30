@@ -1,27 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import { Photo } from "./HomePage";
 import { CircularProgress, Grid } from "@material-ui/core";
-
-const setIsFavorite = (id: string, status: boolean) => {
-  localStorage.setItem(id, String(status));
-};
-
-const toggleFavorite = (id: string) => {
-  const isFavorite = getIsFavorite(id);
-  setIsFavorite(id, !isFavorite);
-};
-
-const getIsFavorite = (id: string) => {
-  return !!localStorage.getItem(id);
-};
+import {
+  removeFromFavorites,
+  addToFavorites,
+  Favorite,
+} from "../../utils/favoritesAPI";
+import { getUserId } from "../../utils/userManagement";
 
 interface Props {
   photos: Photo[];
   loading: boolean;
+  favorites: Favorite;
+  refreshFavorites: () => void;
 }
 
-export const PhotoGrid = ({ photos, loading }: Props) => {
-  // const [favorites, setFavorites] = useState();
+export const PhotoGrid = ({
+  photos,
+  loading,
+  favorites,
+  refreshFavorites,
+}: Props) => {
+  const userId = getUserId() as string;
+
+  const toggleIsFavorite = async (photo: Photo) => {
+    if (favorites[photo.id]) {
+      await removeFromFavorites(userId, photo.id);
+    } else {
+      await addToFavorites(userId, photo.id, photo.url);
+    }
+    refreshFavorites();
+    return;
+  };
+
+  const getIsFavorite = (photoId: string) => {
+    return !!favorites[photoId];
+  };
+
   if (loading) return <CircularProgress />;
   if (!photos.length)
     return <div> type in a search phrase to see cat photos </div>;
@@ -32,8 +47,9 @@ export const PhotoGrid = ({ photos, loading }: Props) => {
         {photos.map((photo) => (
           <Grid key={photo.id} item>
             <img
+              alt={photo.url}
               style={getIsFavorite(photo.id) ? { border: "dashed red" } : {}}
-              onClick={() => toggleFavorite(photo.id)}
+              onClick={() => toggleIsFavorite(photo)}
               width="150px"
               src={photo.url}
             />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import { CustomAppBar } from "./components/customAppBar/CustomAppBar";
 import { HomePage } from "./components/homePage/HomePage";
-import { isLoggedIn, logIn } from "./userManagement";
+import { isLoggedIn, logIn } from "./utils/userManagement";
 import { LoginDialog } from "./components/loginDialog/LoginDialog";
 
 function App() {

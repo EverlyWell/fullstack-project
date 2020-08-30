@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Button, Grid } from "@material-ui/core";
-import { isLoggedIn, getUserId, logOut } from "../../userManagement";
+import { isLoggedIn, getUserId, logOut } from "../../utils/userManagement";
 
 export const CustomAppBar = () => {
   return (
