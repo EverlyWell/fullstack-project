@@ -45,12 +45,15 @@ class Main extends Component {
   }
   async onBreedSelectChange(e) {
     this.setState({ loader: true })
+    this.setState({ selected_animated: false })
+    this.setState({ showAnimatedInput: false })
     await this.setState({ selected_breed: e.target.value });
     this.resetSelect(this.state.selected_category, 'selected_category');
     await this.loadBreedImages();
   }
   async onCategorySelectChange(e) {
     this.setState({ loader: true })
+    this.setState({ showAnimatedInput: true })
     await this.setState({ selected_category: e.target.value });
     this.resetSelect(this.state.selected_breed, 'selected_breed');
     await this.loadBreedImages();
