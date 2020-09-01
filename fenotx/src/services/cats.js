@@ -11,9 +11,9 @@ export const getCategories = async () => {
   return res.data;
 }
 
-export const getCatsImages = async (breed_id, category_id, amount) => {
+export const getCatsImages = async (breed_id, category_id, amount, animated) => {
   const res = await axios('/search', {
-    params: { breed_id: breed_id, category_id: category_id, limit: amount }
+    params: { breed_id: breed_id, category_id: category_id, limit: amount, animated: animated }
   });
   return res.data;
 }
