@@ -38,11 +38,17 @@
 }
 
 .cat-image {
-  width: 400px;
+  width: 350px;
+  height: 250px;
   border: 1px solid red;
+  padding: 5px;
 }
 .controls {
-  background-color: #ccc;
+  background-color: #f7f7f7;
   padding: 10px;
   margin-bottom: 10px;
+  text-align:center;
+}
+.images{
+  text-align:center;
 }
