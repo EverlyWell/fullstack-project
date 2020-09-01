@@ -13,7 +13,8 @@ module Api::V1
       breed_id = cat_params[:breed_id]
       category_id = cat_params[:category_id]
       limit = cat_params[:limit]
-      @breeds = CatsService.search(breed_id, category_id, limit)
+      animated = cat_params[:animated] == "true" ? true : false
+      @breeds = CatsService.search(breed_id, category_id, limit, animated)
     end
 
     def search_by_breed
@@ -29,7 +30,7 @@ module Api::V1
     private
 
     def cat_params
-      params.permit(:breed_id, :category_id, :limit, :format)
+      params.permit(:breed_id, :category_id, :limit, :format, :animated)
     end
 
   end
