@@ -46,15 +46,13 @@ class Main extends Component {
   async onBreedSelectChange(e) {
     this.setState({ loader: true })
     await this.setState({ selected_breed: e.target.value });
-    if(this.state.selected_category !== 'none')
-      this.setState({ selected_category: 'none' });
+    this.resetSelect(this.state.selected_category, 'selected_category');
     await this.loadBreedImages();
   }
   async onCategorySelectChange(e) {
     this.setState({ loader: true })
     await this.setState({ selected_category: e.target.value });
-    if(this.state.selected_breed !== 'none')
-      this.setState({ selected_breed: 'none' });
+    this.resetSelect(this.state.selected_breed, 'selected_breed');
     await this.loadBreedImages();
   }
   async onImageCountSelectChange(e) {
@@ -66,6 +64,10 @@ class Main extends Component {
     this.setState({ loader: true })
     await this.setState({ selected_animated: e.target.value });
     await this.loadBreedImages();
+  }
+  resetSelect(selectedState, selectedName){
+    if(selectedState !== 'none')
+      this.setState({ [selectedName]: 'none' });
   }
   componentDidMount() {
     this.setState({ loader: true })
