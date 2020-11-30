@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@giphy/js-fetch-api": "^2.0.0-alpha.0",
+    "@giphy/react-components": "^2.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0"
+  }
+}
