@@ -18,9 +18,24 @@ class Giphy
     begin
       #Search Endpoint
       result = @api_instance.gifs_search_get(@api_key, query, @opts)
-      {error: false, data: result.data}
+      parsed_results = merge_with_favorites(result.data)
+
+      {error: false, data: parsed_results}
     rescue GiphyClient::ApiError => e
       {error: true, data: e.message}
     end
   end
+
+  private
+
+  def merge_with_favorites(giphy_images)
+    ids = giphy_images['data'].map {|img| img['id']}
+    favorites = Favorites.where(giphy_id: ids).pluck(:giphy_id)
+    giphy_imagesp['data'].each_with_index do |img, idx|
+      if favorites.include?(img['id'])
+        giphy_images['data'][idx]['favorited'] = true
+      end
+    ends
+  end
+
 end

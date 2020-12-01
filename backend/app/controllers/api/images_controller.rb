@@ -4,10 +4,7 @@ class Api::ImagesController < ApplicationController
     if query.nil?
       render json: {error: true, data: 'Please provide a search term'}
     else
-      @giphy_images = giphy_client.search( query )
-
-      merge_with_favorites
-
+       response = giphy_client.search( query )
       if response[:error]
         render json: response, status: 400
       else
@@ -18,16 +15,6 @@ class Api::ImagesController < ApplicationController
 
 
   private
-
-  def merge_with_favorites
-    ids = @giphy_images.map {|img| img['id']}
-    favorites = Favorites.where(giphy_id: ids).pluck(:giphy_id)
-    @giphy_images.each_with_index do |img, idx|
-      if favorites.include?(img['id'])
-        @giphy_images[idx]['favorited'] = true
-      end
-    end
-  end
 
   def giphy_client
     api_key = Rails.application.credentials.giphy[:key]
