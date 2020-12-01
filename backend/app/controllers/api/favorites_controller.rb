@@ -1,4 +1,4 @@
-class FavoritesController < ApplicationController
+class Api::FavoritesController < ApplicationController
   def index
     @favorites = Favorite.all
     render json: { favorites: @favorites }
@@ -14,7 +14,7 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorite.find_by(giphy_id: favorite_params[:gihpy_id])
+    @favorite = Favorite.find_by(giphy_id: favorite_params[:giphy_id])
     if @favorite.destroy
       head :no_content
     else

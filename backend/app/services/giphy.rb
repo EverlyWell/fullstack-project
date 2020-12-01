@@ -17,8 +17,8 @@ class Giphy
   def search(query)
     begin
       #Search Endpoint
-      result = api_instance.gifs_search_get(@api_key, query, @opts)
-      {error: false, data: result}
+      result = @api_instance.gifs_search_get(@api_key, query, @opts)
+      {error: false, data: result.data}
     rescue GiphyClient::ApiError => e
       {error: true, data: e.message}
     end
