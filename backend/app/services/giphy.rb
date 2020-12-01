@@ -2,7 +2,7 @@
 require 'GiphyClient'
 class Giphy
 
-  def initialize(api_key, opts)
+  def initialize(api_key, opts = false)
     @api_key = api_key
     @opts = opts || {
       limit: 25, # Integer | The maximum number of records to return.
