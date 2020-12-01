@@ -55,3 +55,16 @@ Rails/React coding project for full-stack developer candidates
 #### Proxys and routing:
 - Any fetch requests made from the frontend to `/api` will be routed to the backend server
 - Ensure all routes are included in the `:api` namespace on the backend
+
+##### Submission Notes
+
+###### Things I'd do if I had more time
+- Add tests for the backend and FE
+- Add more SCSS to FE to make it look pretty
+- Put API helper methods into a class in FE
+- Use serializer based method of combining favorites and giphy search results
+- Add in JWT expiration / blacklist (I really wanted to roll my own; devise would have been faster)
+
+###### Things I'd do next time
+- Smaller commits with better messages (a bad habit from owning / leading most the codebases I work on)
+
