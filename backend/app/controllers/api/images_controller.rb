@@ -5,10 +5,10 @@ class Api::ImagesController < ApplicationController
       render json: {error: true, data: 'Please provide a search term'}
     else
        response = giphy_client.search( query )
-      if response[:error]
+      if response[:error] === true
         render json: response, status: 400
       else
-        render json: response, status: 400
+        render json: response
       end
     end
   end

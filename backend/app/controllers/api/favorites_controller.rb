@@ -1,11 +1,12 @@
 class Api::FavoritesController < ApplicationController
   def index
     @favorites = Favorite.all
-    render json: { favorites: @favorites }
+    gifs = get_favorites
+    render json: { data: gifs}
   end
 
   def create
-    @favorite = Favorite.create(favorite_params)
+    @favorite = @user.favorites.new(favorite_params)
     if @favorite.save
       render json: { status: :created, favorite: @favorite }
     else
@@ -14,7 +15,7 @@ class Api::FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = Favorite.find_by(giphy_id: favorite_params[:giphy_id])
+    @favorite = @user.favorites.find_by(giphy_id: favorite_params[:giphy_id])
     if @favorite.destroy
       head :no_content
     else
@@ -26,5 +27,19 @@ class Api::FavoritesController < ApplicationController
 
   def favorite_params
     params.require(:favorite).permit(:giphy_id)
+  end
+
+  def giphy_client
+    api_key = Rails.application.credentials.giphy[:key]
+    @giphy_client ||= Giphy.new( api_key )
+  end
+
+  def get_favorites
+    gifs = []
+    ## No batch call :-(
+    @favorites.each do |fav|
+      gifs << giphy_client.find_by_id(fav.giphy_id)[:data]
+    end
+    gifs
   end
 end
