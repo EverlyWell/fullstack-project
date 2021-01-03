@@ -12,7 +12,7 @@
       username: username,
       password: password
     }});
-    if (result.data.token) {
+    if (result.data.token != undefined) {
       storeToken(result.data.token);
       return true;
     } else {

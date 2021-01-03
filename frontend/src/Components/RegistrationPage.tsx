@@ -10,11 +10,14 @@ import { loggedIn, register } from '../Services/AuthenticationService';
     const handleFormSubmit = (e:any) => {
       e.preventDefault();
       
-      if (register(username, password)) {
-        history.push('/')
-      } else {
-        alert('Invalid username or password');
-      }
+      const result = register(username, password);
+      result.then((response) => {
+        if (response === true) {
+          history.push('/')
+        } else {
+          alert('Invalid username or password');
+        }
+      })
     }
 
     const handleChange = (e:any) => {

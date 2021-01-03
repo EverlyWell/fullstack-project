@@ -10,11 +10,14 @@
     const handleFormSubmit = (e:any) => {
       e.preventDefault();
       
-      if (login(username, password)) {
-        history.push('/')
-      } else {
-        alert('Invalid username or password');
-      }
+      const result = login(username, password);
+      result.then((response) => {
+        if (response === true) {
+          history.push('/')
+        } else {
+          alert('Invalid username or password');
+        }
+      })
     }
 
     const handleChange = (e:any) => {

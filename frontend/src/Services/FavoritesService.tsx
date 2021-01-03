@@ -20,11 +20,10 @@ export const createFavorite = async (image: any) => {
   );
 }
 
-export const removeFavorite = async (image: any, previouslyStored = false) => {
-  const id = previouslyStored ? image.giphy_id : image.id;
+export const removeFavorite = async (image: any) => {
   await axios.post(deleteFavoriteUrl, { 
       favorite: {
-        giphy_id: id
+        giphy_id: image.id
       }
     },
     { 

@@ -2,6 +2,7 @@ import React from 'react'
 import Favorite from './Favorite'
 
 const FavoriteContainer: any = (props: {favorites: any}) => {
+
   if (props.favorites.length > 0) {
     return (
       <div>
