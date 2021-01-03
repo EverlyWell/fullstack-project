@@ -7,8 +7,9 @@ const FavoritesPage: any = (props: {images: any}) => {
 
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [filteredFavorites, setFilteredFavorites] = useState([]);
 
-    const favoritesUrl = '/api/v1/favorites'
+    const favoritesUrl = '/api/v1/favorites';
     
     async function getFavorites() {
       setLoading(true);
@@ -16,6 +17,7 @@ const FavoritesPage: any = (props: {images: any}) => {
         'Authorization': `Bearer ${getToken()}`
       }});
       setFavorites(result.data);
+      setFilteredFavorites(result.data);
       setLoading(false);
     }
     
@@ -34,19 +36,20 @@ const FavoritesPage: any = (props: {images: any}) => {
             <form onSubmit = {(e) => e.preventDefault()}>
               <input type = "search" 
                      onChange = {(e) => {
+                
                 const filter = favorites.filter((favorite:any) => {
                   return (
                     favorite.name.toLowerCase().includes(e.target.value.toLowerCase())
                   )
                 })
-                setFavorites(filter)
+                setFilteredFavorites(filter)
                 if(e.target.value === '') {
-                  getFavorites();
+                  setFilteredFavorites(favorites);
               }}} />
               </form>
             <p>Favorites:</p>
             <div>
-              <FavoriteContainer favorites={favorites} />
+              <FavoriteContainer favorites={filteredFavorites} />
             </div>
           </div> : ""}
         </div> 
