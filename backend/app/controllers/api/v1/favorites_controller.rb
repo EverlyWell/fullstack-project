@@ -1,12 +1,14 @@
 class Api::V1::FavoritesController < ApplicationController
 
   def index
-    @favorites = Favorite.all
+    @favorites = logged_in_user.favorites
     render json: @favorites
   end
     
   def create
-    @favorite = Favorite.new(favorite_params)
+    save_params = favorite_params.clone
+    save_params["user_id"] = logged_in_user.id
+    @favorite = Favorite.new(save_params)
     
     if @favorite.save
       render json: [], status: :ok
@@ -17,7 +19,7 @@ class Api::V1::FavoritesController < ApplicationController
 
   def delete
     @giphy_id = favorite_params[:giphy_id]
-    Favorite.where(giphy_id: @giphy_id).destroy_all
+    Favorite.where(giphy_id: @giphy_id, used_id: logged_in_user.id).destroy
 
     render json: :nothing, status: :ok
   end
