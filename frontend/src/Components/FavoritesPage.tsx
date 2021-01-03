@@ -17,7 +17,6 @@ const FavoritesPage: any = (props: {images: any}) => {
     }
     
     useEffect(() => {
-      console.log('hey');
       getFavorites();
     }, []);
 

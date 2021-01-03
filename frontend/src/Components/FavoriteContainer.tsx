@@ -4,11 +4,11 @@ import Favorite from './Favorite'
 const FavoriteContainer: any = (props: {favorites: any}) => {
   if (props.favorites.length >= 1) {
     return (
-    <div>
-      {props.favorites.map((favorite:any) => (
-        <Favorite key={favorite.id} favorite={favorite} />
-      ))}
-    </div> 
+      <div>
+        {props.favorites.map((favorite:any) => (
+          <Favorite key={favorite.id} favorite={favorite} />
+        ))}
+      </div> 
     )
   } else {
     return (<div>No Favorites</div>)

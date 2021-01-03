@@ -17,6 +17,8 @@ class Api::V1::FavoritesController < ApplicationController
   def delete
     @giphy_id = favorite_params[:giphy_id]
     Favorite.where(giphy_id: @giphy_id).destroy_all
+
+    render json: :nothing, status: :ok
   end
   
 
