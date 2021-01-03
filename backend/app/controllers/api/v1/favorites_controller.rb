@@ -7,6 +7,7 @@ class Api::V1::FavoritesController < ApplicationController
     
   def create
     @favorite = Favorite.new(favorite_params)
+    
     if @favorite.save
       render json: [], status: :ok
     else
@@ -27,4 +28,5 @@ class Api::V1::FavoritesController < ApplicationController
   def favorite_params
     params.require(:favorite).permit(:giphy_id, :url, :name)
   end
+  
 end

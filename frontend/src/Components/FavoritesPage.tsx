@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { getToken, loggedIn } from '../Services/AuthenticationService';
 import FavoriteContainer from './FavoriteContainer';
 
 const FavoritesPage: any = (props: {images: any}) => {
@@ -11,24 +12,29 @@ const FavoritesPage: any = (props: {images: any}) => {
     
     async function getFavorites() {
       setLoading(true);
-      const result:any = await axios.get(favoritesUrl);
+      const result:any = await axios.get(favoritesUrl, { headers: {
+        'Authorization': `Bearer ${getToken()}`
+      }});
       setFavorites(result.data);
       setLoading(false);
     }
     
     useEffect(() => {
-      getFavorites();
+      if (loggedIn() === true) {
+        getFavorites();
+      }
     }, []);
 
     return (
         <div>
+          {loggedIn() !== true ? <p>Log in to see your favorites</p> : ""} 
           {loading ? <span>Loading</span> : ''} 
-          <div>
+          {loggedIn() === true ? <div>
             <p>Favorites:</p>
             <div>
               <FavoriteContainer favorites={favorites} />
             </div>
-          </div>
+          </div> : ""}
         </div> 
     );
 }

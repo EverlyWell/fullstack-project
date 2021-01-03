@@ -2,7 +2,7 @@ import React from 'react'
 import Favorite from './Favorite'
 
 const FavoriteContainer: any = (props: {favorites: any}) => {
-  if (props.favorites.length >= 1) {
+  if (props.favorites.length > 0) {
     return (
       <div>
         {props.favorites.map((favorite:any) => (
