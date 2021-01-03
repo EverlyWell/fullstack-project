@@ -29,7 +29,21 @@ const FavoritesPage: any = (props: {images: any}) => {
         <div>
           {loggedIn() !== true ? <p>Log in to see your favorites</p> : ""} 
           {loading ? <span>Loading</span> : ''} 
-          {loggedIn() === true ? <div>
+          {loggedIn() === true ? 
+          <div>
+            <form onSubmit = {(e) => e.preventDefault()}>
+              <input type = "search" 
+                     onChange = {(e) => {
+                const filter = favorites.filter((favorite:any) => {
+                  return (
+                    favorite.name.toLowerCase().includes(e.target.value.toLowerCase())
+                  )
+                })
+                setFavorites(filter)
+                if(e.target.value === '') {
+                  getFavorites();
+              }}} />
+              </form>
             <p>Favorites:</p>
             <div>
               <FavoriteContainer favorites={favorites} />
