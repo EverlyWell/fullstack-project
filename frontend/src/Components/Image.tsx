@@ -8,7 +8,7 @@ const Image = (props: { image: any }) => {
   return (
     <div className="imageContainer">
       <img className="image" src={props.image.images.preview_gif.url} alt='failed' />
-      <br />
+      <div>{props.image.title}</div>
       {loggedIn() === true ? <FavoriteIcon image={props.image} /> : 
                               <div>Log in to add to favorites</div>}
     </div>

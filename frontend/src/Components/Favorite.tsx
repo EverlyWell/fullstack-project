@@ -8,10 +8,8 @@ import '../Styles/image.css'
     return (
       <div className="imageContainer">
         <img className="image" src={props.favorite.url} alt='failed' />
-        <br />
-        <div onClick={() => removeFavorite(props.favorite, true)}>
-          <FaHeart />
-        </div>
+        <div>{props.favorite.name}</div>
+        <div><FaHeart /></div>
       </div>
     )
   }
