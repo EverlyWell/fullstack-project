@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
-import axios from 'axios'
+import React from 'react';
 
 const SearchBar = (props) => {
     
     return(
-        <div></div>
+        <div>
+            <h1>Search</h1>
+            <form onSubmit={props.handleSubmit}>
+                <input type="search" name="search" value={props.search} placeholder="Search Gifs" onChange={props.handleInput} />
+                <button type="submit"> Search </button>
+            </form>
+        </div>
     )
 }
 
