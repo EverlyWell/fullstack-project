@@ -15,5 +15,9 @@ module Backend
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # Add the 'lib' directory to the eager load paths
+    # 'lib' will contain the code for communicating with the Dog API
+    config.eager_load_paths += %W(#{config.root}/lib)
   end
 end
