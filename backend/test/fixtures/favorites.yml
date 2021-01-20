@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  breed_id: 1
+  image_url: MyString
+  name: MyString
+
+two:
+  breed_id: 1
+  image_url: MyString
+  name: MyString
