@@ -16,10 +16,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios({
-      method: 'GET',
-      url: `http://localhost:3010/api/gifs/search?search=${search}`
-    })
+    axios.get(`http://localhost:3010/api/gifs/search?search=${search}`)
     .then(res => {
       let gifList = res.data.data.map((gif) => {
         return {
@@ -28,7 +25,7 @@ function App() {
           url: gif.images.original.url
         }
       })
-      console.log(res)
+      // console.log(res)
       setGifs(gifList)
     })
     .catch(error => {
@@ -39,7 +36,6 @@ function App() {
   //obtain search term from user input
 
   const handleInput = (e) => {
-    e.preventDefault()
     const newSearchTerm = e.target.value
     setSearch(newSearchTerm)
   }
@@ -53,17 +49,13 @@ function App() {
   //post gifs that are favorited to backend
 
   const handleFavorited = (gif) => {
-    axios({
-      method: 'POST',
-      url: 'http://localhost:3010/api/favorites',
-      data: { favorite: {
+    axios.post('http://localhost:3010/api/favorites',{
+      favorite: {
         title: gif.title,
         url: gif.url,
         giphy_id: gif.id
-      }
-
-      }
-    })
+      }}
+    )
     .then(res => {
       addGif(gif)
       console.log(res)
@@ -77,7 +69,7 @@ function App() {
   return (
     <div className="App">
       <SearchBar handleSubmit={handleSubmit} handleInput={handleInput} />
-      <GifsList gifs={gifs} handleFavorited={handleFavorited} addGif={addGif} />
+      <GifsList gifs={gifs} handleFavorited={handleFavorited} />
       <Favorites />
     </div>
   );

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
+import {Grid} from 'semantic-ui-react'
 import FavoriteGifs from "./FavoriteGifs"
 
 const Favorites = () => {
@@ -9,12 +10,8 @@ const Favorites = () => {
 
     useEffect(() => {
         const fetchData = () => {
-            axios({
-                method: "GET",
-                url: "http://localhost:3010/api/favorites"
-            })
+            axios.get("http://localhost:3010/api/favorites")
             .then(res => {
-                console.log(res.data)
                 setFavorites(res.data)
             })
             .catch(error => {
@@ -25,11 +22,13 @@ const Favorites = () => {
         
     }, [])
 
-    console.log(favorites)
     return(
         <div>
             <h1>Favorites</h1>
-            {favorites.map(favoriteGifs =>  <FavoriteGifs favoriteGifs={favoriteGifs} />)}
+            <br />
+            <Grid>
+                {favorites.map(favoriteGifs =>  <FavoriteGifs key={favoriteGifs.id} favoriteGifs={favoriteGifs} />)}
+            </Grid>
         </div>
     )
 }
