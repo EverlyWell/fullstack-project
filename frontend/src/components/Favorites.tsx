@@ -6,8 +6,6 @@ function Favorites() {
     const token = sessionStorage.getItem('token');
     
     const favoritePics = async (e:any) => {
-        console.log(`${token}`)
-        // const authorization = "Bearer " + token
         axios.get("http://localhost:3010/api/favorites",  { headers: {
             'Authorization': `Bearer ${token}`
         }})
