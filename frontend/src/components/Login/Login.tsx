@@ -16,10 +16,6 @@ function Login() {
           .catch(error => console.log(error))
     };
     console.log(token);
-       // if (token) {
-    //   return <Redirect to='/' />
-    //  }
-  
  
   return (
     <div className="login-wrapper">
