@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   namespace :api do
     resources :dogs, only: [:index]
 
+    resource :users, only: [:create] do
+      post "/login", to: "users#login", as: :login
+    end
   end
 end
