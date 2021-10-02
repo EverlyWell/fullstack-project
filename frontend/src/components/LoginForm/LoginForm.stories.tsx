@@ -1,4 +1,3 @@
-
 import React from 'react';
 import LoginForm from './LoginForm';
 
@@ -8,9 +7,10 @@ export default {
   argTypes: {},
 };
 
-const Template = (args) => <LoginForm {...args} />;
+const Template = () => <LoginForm />;
 
 export const Primary = Template.bind({});
+
 Primary.args = {
   primary: true,
 };
