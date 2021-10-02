@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import StyledComponents from './LoginFormStyled';
 import Spinner from "react-spinners/ClipLoader";
+import { LogInOrCreateUserName, LoginSuccessPayload } from '../../api/api';
 
 
 const {
@@ -17,14 +18,20 @@ const {
     PasswordInput,
 } = StyledComponents;
   
+interface Props {
+    setCredentials: (credentials : any) => void
+}
 
-const LoginForm = () => {
-    const [userName, setUserName] = useState('');
+const LoginForm = (props : Props) => {
+    const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setLoading] = useState(false);
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         setLoading(true);
+        const credentials  = await LogInOrCreateUserName(username, password);
+        setLoading(false);
+        props.setCredentials(credentials);
     };
 
     return (
@@ -36,7 +43,7 @@ const LoginForm = () => {
                 <InputContainer>
                     <UsernameInput 
                         onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setUserName(e.target.value)}
-                        placeholder='username' value={userName} 
+                        placeholder='username' value={username} 
                     />
                 </InputContainer>
                 <InputContainer>

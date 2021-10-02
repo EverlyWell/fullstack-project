@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import LoginForm  from './components/LoginForm/LoginForm';
 
-function App() {
+interface Credentials {
+  token: string,
+  cat_api_sub_id: string,
+  username: string,
+}
+
+const App = () => {
+  const [credentials, setCredentials] = useState<Credentials | null>(null);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {credentials === null ? <LoginForm setCredentials={setCredentials} /> : <div>{`logged in as: ${credentials.username}`}</div>}
     </div>
   );
 }
