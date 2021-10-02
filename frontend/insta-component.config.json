@@ -1,0 +1,8 @@
+
+{
+    "native": false,
+    "typescript": true,
+    "storybook": true,
+    "styledComponents": true,
+    "tests": true
+}
