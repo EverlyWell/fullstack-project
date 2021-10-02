@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import StyledComponents from './LoginFormStyled';
 import Spinner from "react-spinners/ClipLoader";
-import { LogInOrCreateUserName, LoginSuccessPayload } from '../../api/api';
+import { LogInOrCreateUserName } from '../../api/api';
 
 
 const {

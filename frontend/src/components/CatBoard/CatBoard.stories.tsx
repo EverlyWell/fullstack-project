@@ -1,16 +1,15 @@
+export {}
+// import CatBoard from './CatBoard';
 
-import React from 'react';
-import CatBoard from './CatBoard';
+// export default {
+//   title: 'CatBoard',
+//   component: CatBoard,
+//   argTypes: {},
+// };
 
-export default {
-  title: 'CatBoard',
-  component: CatBoard,
-  argTypes: {},
-};
+// const Template = (args) => <CatBoard {...args} />;
 
-const Template = (args) => <CatBoard {...args} />;
-
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-};
+// export const Primary = Template.bind({});
+// Primary.args = {
+//   primary: true,
+// };

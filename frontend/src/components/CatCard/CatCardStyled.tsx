@@ -19,6 +19,7 @@ const Image = styled.img`
 const ImageContainer = styled.div`
     width: 250px;
     height: 250px;
+    position: relative;
     overflow: hidden;
 `;
 

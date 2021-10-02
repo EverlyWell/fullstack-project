@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import LoginForm  from './components/LoginForm/LoginForm';
+import CatBoard from './components/CatBoard/CatBoard';
 
 interface Credentials {
   token: string,
@@ -12,7 +13,7 @@ const App = () => {
   
   return (
     <div>
-      {credentials === null ? <LoginForm setCredentials={setCredentials} /> : <div>{`logged in as: ${credentials.username}`}</div>}
+      {credentials === null ? <LoginForm setCredentials={setCredentials} /> : <CatBoard sub_id={credentials.cat_api_sub_id} />}
     </div>
   );
 }
