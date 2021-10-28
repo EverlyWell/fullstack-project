@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a href="/" className="navbar-brand">
+          Cats everywhere !!
         </a>
-      </header>
-    </div>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            Cats
+          </li>
+          <li className="nav-item">
+            Add
+          </li>
+        </div>
+      </nav>
+      <div className="container mt-3">
+        [Add cats table here]
+      </div>
+    </>
   );
 }
 
