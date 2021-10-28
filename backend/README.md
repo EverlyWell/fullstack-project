@@ -6,10 +6,15 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+3.0.0
 
 * System dependencies
 
 * Configuration
+
+Environment variables
+
+```export BACKEND_DATABASE_PASSWORD=```
 
 * Database creation
 
