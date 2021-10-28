@@ -21,6 +21,10 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'faraday', '~> 1.7.2'
 # CORS support
 gem 'rack-cors'
+# JWT tokens
+gem 'jwt'
+# Commands
+gem 'simple_command'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
