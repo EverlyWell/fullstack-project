@@ -1,16 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'is valid with valid attributes' do
-    subject { described_class.new }
+  let(:user) { build(:user) }
 
-    it 'is valid with valid attributes' do
-      subject.email = Faker::Internet.email
-      password = Faker::Internet.password
-      subject.password = password
-      subject.password_confirmation = password
-      expect(subject).to be_valid
-    end
+  it 'has a valid factory' do
+    expect(user).to be_valid
+  end
+
+  context 'attributes' do
+    it { is_expected.to respond_to(:email) }
+    it { is_expected.to respond_to(:password) }
+    it { is_expected.to respond_to(:password_confirmation) }
+  end
+
+  context 'validations' do
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:password_digest) }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   end
 
   describe '.authenticate' do

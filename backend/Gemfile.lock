@@ -212,6 +212,8 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     simple_command (0.1.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
@@ -264,6 +266,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   rspec-rails (~> 3.5)
   selenium-webdriver
+  shoulda-matchers
   simple_command
   spring
   spring-watcher-listen (~> 2.0.0)
