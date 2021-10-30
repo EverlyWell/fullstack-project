@@ -35,6 +35,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 # Load support files
+Dir[Rails.root.join('spec', 'support', 'config', '**', '*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec', 'support', 'shared_contexts', '**', '*.rb')].each { |f| require f }
 Dir[Rails.root.join('spec', 'support', 'shared_examples', '**', '*.rb')].each { |f| require f }
 

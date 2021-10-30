@@ -12,9 +12,15 @@ Things you may want to cover:
 
 * Configuration
 
-Environment variables
+### Environment variables
 
-```export BACKEND_DATABASE_PASSWORD=```
+Use `.env` file to declare the varialbes. (see `env.sample`)
+
+```
+export BACKEND_DATABASE_PASSWORD=
+export CATS_API_KEY=
+export CATS_API_URL=
+```
 
 * Database creation
 

@@ -62,6 +62,9 @@ group :test do
   gem 'faker'
   # shoulda matchers
   gem 'shoulda-matchers', require: false
+  # record and reuse responses
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

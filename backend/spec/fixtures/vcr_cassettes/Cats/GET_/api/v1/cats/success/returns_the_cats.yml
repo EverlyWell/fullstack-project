@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.thecatapi.com/v1/images/search?category_ids=&limit=3&order=Asc&page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      x-api-key:
+      - token [CATS_API_KEY]
+      User-Agent:
+      - Faraday v1.7.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-dns-prefetch-control:
+      - 'off'
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      vary:
+      - Origin
+      expires:
+      - Tue, 03 Jul 2001 06:00:00 GMT
+      last-modified:
+      - Fri Oct 29 2021 23:22:21 GMT+0000 (Coordinated Universal Time)
+      cache-control:
+      - post-check=0, pre-check=0
+      pagination-count:
+      - '10587'
+      pagination-page:
+      - '1'
+      pagination-limit:
+      - '3'
+      access-control-expose-headers:
+      - Pagination-Count, Pagination-Page, Pagination-Limit
+      content-type:
+      - application/json; charset=utf-8
+      x-response-time:
+      - 1ms
+      x-cloud-trace-context:
+      - eee312c320630b264660a614d4bd0909
+      date:
+      - Fri, 29 Oct 2021 23:22:21 GMT
+      server:
+      - Google Frontend
+      content-length:
+      - '476'
+    body:
+      encoding: UTF-8
+      string: '[{"breeds":[],"categories":[{"id":1,"name":"hats"}],"id":"g","url":"https://26.media.tumblr.com/tumblr_krwvziszMn1qa9hjso1_1280.jpg","width":600,"height":400},{"breeds":[],"categories":[{"id":1,"name":"hats"}],"id":"j","url":"https://24.media.tumblr.com/tumblr_krwvxh6KLK1qa9hjso1_1280.jpg","width":1002,"height":720},{"breeds":[],"categories":[{"id":1,"name":"hats"}],"id":"m","url":"https://30.media.tumblr.com/tumblr_krvxbfFEsf1qa9hjso1_1280.png","width":516,"height":404}]'
+  recorded_at: Fri, 29 Oct 2021 23:22:21 GMT
+recorded_with: VCR 6.0.0

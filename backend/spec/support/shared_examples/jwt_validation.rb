@@ -3,8 +3,8 @@ RSpec.shared_examples 'JWT validation' do
 
   context 'when the JWT is valid' do
     context 'when the user exists' do
-      it 'success' do
-        expect(response).to have_http_status(204)
+      it 'success', vcr: { record: :once }  do
+        expect(response).to have_http_status(:ok)
       end
     end
 
@@ -15,8 +15,8 @@ RSpec.shared_examples 'JWT validation' do
         }
       end
 
-      it 'returns a json error' do
-        expect(response).to have_http_status(401)
+      it 'returns a json error', vcr: { record: :once }  do
+        expect(response).to have_http_status(:unauthorized)
         expect(response_body).to include('error' => 'Not Authorized')
       end
     end
@@ -26,8 +26,8 @@ RSpec.shared_examples 'JWT validation' do
     context 'bad token encoding ' do
       let(:auth_headers) { { "Authorization" => "Breakfast at Shoneys" } }
 
-      it 'returns a json error' do
-        expect(response).to have_http_status(401)
+      it 'returns a json error', vcr: { record: :once }  do
+        expect(response).to have_http_status(:unauthorized)
         expect(response_body).to include('error' => 'Not Authorized')
       end
     end
@@ -35,8 +35,8 @@ RSpec.shared_examples 'JWT validation' do
     context 'empty string given' do
       let(:auth_headers) { { "Authorization" => "" } }
 
-      it 'returns a json error' do
-        expect(response).to have_http_status(401)
+      it 'returns a json error', vcr: { record: :once }  do
+        expect(response).to have_http_status(:unauthorized)
         expect(response_body).to include('error' => 'Not Authorized')
       end
     end
@@ -44,8 +44,8 @@ RSpec.shared_examples 'JWT validation' do
     context 'no authorization header' do
       let(:auth_headers) { { } }
 
-      it 'returns a json error' do
-        expect(response).to have_http_status(401)
+      it 'returns a json error', vcr: { record: :once }  do
+        expect(response).to have_http_status(:unauthorized)
         expect(response_body).to include('error' => 'Not Authorized')
       end
     end
