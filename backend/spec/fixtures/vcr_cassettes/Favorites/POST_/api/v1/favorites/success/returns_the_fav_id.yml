@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.thecatapi.com/v1/favourites
     body:
       encoding: UTF-8
-      string: '{"image_id":"YTvbh1DEh","sub_id":"example@gmail.com"}'
+      string: '{"image_id":"1","sub_id":"example@gmail.com"}'
     headers:
       User-Agent:
       - Faraday v1.7.2
@@ -35,16 +35,15 @@ http_interactions:
       content-type:
       - application/json; charset=utf-8
       x-cloud-trace-context:
-      - 92cd0ae3ecb90bf2e20a27eabe735d63
+      - f3df63175e5fb3f418bad111814536ea
       date:
-      - Sun, 31 Oct 2021 17:54:33 GMT
+      - Sun, 31 Oct 2021 18:45:00 GMT
       server:
       - Google Frontend
       content-length:
       - '117'
     body:
       encoding: UTF-8
-      string: '{"message":"DUPLICATE_FAVOURITE - favourites are unique for account
-        + image_id + sub_id","status":400,"level":"info"}'
-  recorded_at: Sun, 31 Oct 2021 17:54:33 GMT
+      string: '{"message":"SUCCESS","id":2138537}'
+  recorded_at: Sun, 31 Oct 2021 18:45:00 GMT
 recorded_with: VCR 6.0.0

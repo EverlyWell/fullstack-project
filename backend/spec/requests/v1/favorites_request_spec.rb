@@ -27,7 +27,7 @@ RSpec.describe 'Favorites', type: :request do
   describe 'POST /api/v1/favorites' do
     let(:params) do
       {
-        'image_id' => 'k1R0x8yEc',
+        'image_id' => '1',
         'sub_id' => 'example@gmail.com'
       }
     end
@@ -48,7 +48,7 @@ RSpec.describe 'Favorites', type: :request do
   end
 
   describe 'DELETE /api/v1/favorites' do
-    let(:id) { 'k1R0x8yEc' }
+    let(:id) { '2102473' }
 
     let(:params) do
       {
@@ -61,7 +61,7 @@ RSpec.describe 'Favorites', type: :request do
     end
 
     context 'success' do
-      it 'returns the fav id', vcr: { record: :once } do
+      it 'returns message success', vcr: { record: :once } do
         expect(response).to have_http_status(:ok)
         expect(response_body).to include('message' => 'SUCCESS')
       end
