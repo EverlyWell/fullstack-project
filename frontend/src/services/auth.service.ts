@@ -1,10 +1,8 @@
 import axios from "axios";
-
-// TODO: get from env variables
-const API_URL = "http://localhost:3010/api/v1/authentication/";
+import { authenticationApiUrl } from "../api";
 
 export const signup = async (email: string, password: string, password_confirmation: string) => {
-  const response = await axios.post(API_URL + "signup", {
+  const response = await axios.post(`${authenticationApiUrl}/signup`, {
     email,
     password,
     password_confirmation
@@ -15,7 +13,7 @@ export const signup = async (email: string, password: string, password_confirmat
 };
 
 export const login = async (email: string, password: string) => {
-  const response = await axios.post(API_URL + "signin", {
+  const response = await axios.post(`${authenticationApiUrl}/signin`, {
     email,
     password,
   });
