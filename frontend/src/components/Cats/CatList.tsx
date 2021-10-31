@@ -6,18 +6,21 @@ import { getCats } from "../../services/cats.service";
 import { ICat, ICategory, IPagination } from '../../typings/typings';
 import { Alert, Button, Modal } from "react-bootstrap";
 import { saveFavourite } from "../../services/favourites.service";
+import { getCategories } from "../../services/categories.service";
 
 interface ICatListProps {
-  category: ICategory | undefined;
 }
 
-const CatList = ({category}: ICatListProps) => {
+const CatList = (props: ICatListProps) => {
   const [cats, setCats] = useState<Array<ICat>>([]);
   const [,setPagination] = useState<IPagination>({
     count: 5,
     page: 1,
     limit: 5
   });
+  const [categoryId, setCategoryId] = useState(0);
+  const [category, setCategory] = useState<ICategory>();
+  const [categories, setCategories] = useState<Array<ICategory>>([]);
   const [catIdx, setCatIdx] = useState<number>(0);
   const [limit, setLimit] = useState<number>(5);
   const [page, setPage] = useState<number>(1);
@@ -27,6 +30,16 @@ const CatList = ({category}: ICatListProps) => {
 
   const limits = [5, 10, 20];
   const orders = ['Asc', 'Desc'];
+
+  useEffect(() => {
+    async function getCategoriesPrivate() {
+      setCategories(await getCategories());
+    }
+
+    if (categories.length === 0) {
+      getCategoriesPrivate();
+    }
+  }, [categories]);
 
   useEffect(() => {
     async function getCatsPrivate() {
@@ -60,6 +73,13 @@ const CatList = ({category}: ICatListProps) => {
   }
 
   const handleFavoriteMessageClose = () => setOpenFavoriteMessage(false);
+
+  const handleCategoryChange = (evt: any) => {
+    const categoryId = parseInt(evt.target.value);
+    setCategoryId(categoryId);
+    const selectedCategory = categories.filter((category: ICategory) => category.id === categoryId)[0]
+    setCategory(selectedCategory);
+  }
 
   const columns = useMemo<Column<ICat>[]>(
     () => [
@@ -127,6 +147,30 @@ const CatList = ({category}: ICatListProps) => {
     <div className="container">
       <h1>Cats</h1>
       <div className="list row">
+        {/* Filter section */}
+        <div className="col-md-8">
+          <div className="form-group form-inline">
+            <div className="input-group">
+            <label htmlFor="categories">Category:</label>
+              <select
+                id="categories"
+                aria-label="Category"
+                onChange={handleCategoryChange}
+                value={categoryId}
+              >
+                {categories.map((category: ICategory, index: number) => (
+                  <option
+                    key={`category_item_${index}`}
+                    value={category.id}
+                  >
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+
         {/* Table section */}
         <div className="col-md-12 list">
           <table
@@ -164,45 +208,45 @@ const CatList = ({category}: ICatListProps) => {
         {/* Controls section */}
         <div className="col-md-8">
           <div className="form-group form-inline">
-          <div className="input-group">
-            <label htmlFor="limit">Items per page:</label>
-            <select
-              id="limit"
-              aria-label="Items per page"
-              onChange={handleLimitChange}
-              value={limit}
-            >
-              {limits.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="order">Order:</label>
-            <select
-              id="order"
-              aria-label="Order"
-              onChange={handleOrderChange}
-              value={order}
-            >
-              {orders.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="row">
-            <Pagination
-              count={limit}
-              page={page}
-              siblingCount={1}
-              boundaryCount={1}
-              variant="outlined"
-              shape="rounded"
-              onChange={handlePageChange}
-            />
-          </div>
+            <div className="input-group">
+              <label htmlFor="limit">Items per page:</label>
+              <select
+                id="limit"
+                aria-label="Items per page"
+                onChange={handleLimitChange}
+                value={limit}
+              >
+                {limits.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="order">Order:</label>
+              <select
+                id="order"
+                aria-label="Order"
+                onChange={handleOrderChange}
+                value={order}
+              >
+                {orders.map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="row">
+              <Pagination
+                count={limit}
+                page={page}
+                siblingCount={1}
+                boundaryCount={1}
+                variant="outlined"
+                shape="rounded"
+                onChange={handlePageChange}
+              />
+            </div>
           </div>
         </div>
 

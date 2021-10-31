@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.thecatapi.com/v1/categories?Content-Type=application%2Fjson&x-api-key=51661707-c326-49f5-9da7-47588969d272
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.7.2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-dns-prefetch-control:
+      - 'off'
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      vary:
+      - Origin
+      pagination-count:
+      - '7'
+      pagination-page:
+      - '0'
+      pagination-limit:
+      - '1000'
+      access-control-expose-headers:
+      - Pagination-Count, Pagination-Page, Pagination-Limit
+      cache-control:
+      - public, max-age=12800
+      content-type:
+      - application/json; charset=utf-8
+      x-response-time:
+      - 125ms
+      x-cloud-trace-context:
+      - edee6af511b34c8d62e4deb39a3d3f1c
+      date:
+      - Sun, 31 Oct 2021 02:52:35 GMT
+      server:
+      - Google Frontend
+      content-length:
+      - '176'
+    body:
+      encoding: UTF-8
+      string: '[{"id":5,"name":"boxes"},{"id":15,"name":"clothes"},{"id":1,"name":"hats"},{"id":14,"name":"sinks"},{"id":2,"name":"space"},{"id":4,"name":"sunglasses"},{"id":7,"name":"ties"}]'
+  recorded_at: Sun, 31 Oct 2021 02:52:35 GMT
+recorded_with: VCR 6.0.0
