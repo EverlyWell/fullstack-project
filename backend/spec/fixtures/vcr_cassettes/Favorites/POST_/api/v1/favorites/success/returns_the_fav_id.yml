@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.thecatapi.com/v1/favourites
+    body:
+      encoding: UTF-8
+      string: '{"image_id":"YTvbh1DEh","sub_id":"example@gmail.com"}'
+    headers:
+      User-Agent:
+      - Faraday v1.7.2
+      Content-type:
+      - application/json
+      x-api-key:
+      - token [CATS_API_KEY]
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      x-dns-prefetch-control:
+      - 'off'
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      vary:
+      - Origin
+      content-type:
+      - application/json; charset=utf-8
+      x-cloud-trace-context:
+      - 92cd0ae3ecb90bf2e20a27eabe735d63
+      date:
+      - Sun, 31 Oct 2021 17:54:33 GMT
+      server:
+      - Google Frontend
+      content-length:
+      - '117'
+    body:
+      encoding: UTF-8
+      string: '{"message":"DUPLICATE_FAVOURITE - favourites are unique for account
+        + image_id + sub_id","status":400,"level":"info"}'
+  recorded_at: Sun, 31 Oct 2021 17:54:33 GMT
+recorded_with: VCR 6.0.0

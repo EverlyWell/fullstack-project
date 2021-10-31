@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
       resources :cats, only: [:index]
       resources :categories, only: [:index]
-      resources :favourites, only: [:index, :create, :destroy]
+      resources :favorites, only: [:index, :create, :destroy]
     end
   end
 

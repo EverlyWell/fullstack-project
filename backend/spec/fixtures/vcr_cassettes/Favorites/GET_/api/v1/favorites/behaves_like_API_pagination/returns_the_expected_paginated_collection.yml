@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.thecatapi.com/v1/favourites?limit=3&order=Asc&page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.7.2
+      Content-type:
+      - application/json
+      x-api-key:
+      - token [CATS_API_KEY]
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      x-dns-prefetch-control:
+      - 'off'
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      vary:
+      - Origin
+      pagination-count:
+      - '10'
+      pagination-page:
+      - '1'
+      pagination-limit:
+      - '3'
+      access-control-expose-headers:
+      - Pagination-Count, Pagination-Page, Pagination-Limit
+      content-type:
+      - application/json; charset=utf-8
+      x-response-time:
+      - 132ms
+      x-cloud-trace-context:
+      - 5bed40770cce31216e5b9426fb65deeb
+      date:
+      - Sun, 31 Oct 2021 17:54:32 GMT
+      server:
+      - Google Frontend
+      content-length:
+      - '536'
+    body:
+      encoding: UTF-8
+      string: '[{"id":2102473,"user_id":"dccq5n","image_id":"1","sub_id":"challenge","created_at":"2021-09-20T14:49:03.000Z","image":{"id":"1","url":"https://cdn2.thecatapi.com/images/1.jpg"}},{"id":2102486,"user_id":"dccq5n","image_id":"1c","sub_id":null,"created_at":"2021-09-20T16:53:05.000Z","image":{"id":"1c","url":"https://cdn2.thecatapi.com/images/1c.gif"}},{"id":2138537,"user_id":"dccq5n","image_id":"g","sub_id":"example@gmail.com","created_at":"2021-10-29T23:58:05.000Z","image":{"id":"g","url":"https://cdn2.thecatapi.com/images/g.jpg"}}]'
+  recorded_at: Sun, 31 Oct 2021 17:54:32 GMT
+recorded_with: VCR 6.0.0

@@ -10,8 +10,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
 import Public from './components/Public';
-import CatList from './components/Cats/CatList';
-import FavouriteList from './components/Favourites/FavouriteList';
+import CatList from './components/Cats';
+import FavouriteList from './components/Favorites/FavouriteList';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);

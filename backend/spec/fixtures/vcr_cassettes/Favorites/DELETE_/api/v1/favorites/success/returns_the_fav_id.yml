@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.thecatapi.com/v1/favourites/YTvbh1DEh
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.7.2
+      Content-type:
+      - application/json
+      x-api-key:
+      - token [CATS_API_KEY]
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      x-dns-prefetch-control:
+      - 'off'
+      x-frame-options:
+      - SAMEORIGIN
+      strict-transport-security:
+      - max-age=15552000; includeSubDomains
+      x-download-options:
+      - noopen
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+      vary:
+      - Origin
+      content-type:
+      - application/json; charset=utf-8
+      x-cloud-trace-context:
+      - f4106b7152d1bb7ab79b253b9ac52501;o=1
+      date:
+      - Sun, 31 Oct 2021 17:54:33 GMT
+      server:
+      - Google Frontend
+      content-length:
+      - '57'
+    body:
+      encoding: UTF-8
+      string: '{"message":"INVALID_ACCOUNT","status":400,"level":"info"}'
+  recorded_at: Sun, 31 Oct 2021 17:54:33 GMT
+recorded_with: VCR 6.0.0
