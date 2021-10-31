@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../../services/categories.service";
-import { ICategory } from "../../typings/typings";
+import { ICategory } from "../../typings";
 
 interface IFiltersProps {
   categoryId: number;
@@ -33,6 +33,7 @@ const Filters = ({categoryId, handleCategoryChange}: IFiltersProps) => {
         <label htmlFor="categories">Category:</label>
           <select
             id="categories"
+            data-testid="categories"
             aria-label="Category"
             onChange={onCategoryChange}
             value={categoryId}

@@ -59,6 +59,7 @@ const Login = (props: ILoginProps) => {
       <div className="card card-container">
         <form onSubmit={handleSubmit(onSubmit)}>
           <img
+            data-testid="login-image"
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
             className="profile-img-card"
@@ -67,6 +68,7 @@ const Login = (props: ILoginProps) => {
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
+              data-testid="login-email"
               type="text"
               {...register('email')}
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
@@ -77,6 +79,7 @@ const Login = (props: ILoginProps) => {
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
+              data-testid="login-password"
               type="password"
               {...register('password')}
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
@@ -96,10 +99,16 @@ const Login = (props: ILoginProps) => {
             {loading && (
               <span className="spinner-border spinner-border-sm"></span>
             )}
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            <button
+              data-testid="login-submit"
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
               Login
             </button>
             <button
+              data-testid="login-reset"
               type="button"
               onClick={() => reset()}
               className="btn btn-warning float-right"

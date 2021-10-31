@@ -11,7 +11,7 @@ import Register from './components/Register';
 import Profile from './components/Profile';
 import Public from './components/Public';
 import CatList from './components/Cats';
-import FavouriteList from './components/Favorites/FavouriteList';
+import FavoriteList from './components/Favorites';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -52,8 +52,8 @@ function App() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to={"/favourites"} className="nav-link">
-                  Favourites
+                <Link to={"/favorites"} className="nav-link">
+                  Favorites
                 </Link>
               </li>
             </>
@@ -92,7 +92,7 @@ function App() {
         <Switch>
           <Route exact path={["/", "/home"]} component={Public} />
           <Route exact path="/cats" component={CatList} />
-          <Route exact path="/favourites" component={FavouriteList} />
+          <Route exact path="/favorites" component={FavoriteList} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />

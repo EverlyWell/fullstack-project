@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Column, useTable } from "react-table";
-import { ICat } from "../../typings/typings";
+import { ICat } from "../../typings";
 
 interface ICatsTableProps {
   cats: ICat[];
@@ -75,6 +75,7 @@ const CatsTable = ({cats, handleOpenCatDialog, handleAddFavoriteClick}: ICatsTab
   return (
     <div className="col-md-12 list">
       <table
+        data-testid="cats-table"
         className="table table-striped table-bordered"
         {...getTableProps()}
       >

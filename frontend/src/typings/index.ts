@@ -5,7 +5,7 @@ export interface ICategory {
 
 export interface ICat {
   id: string;
-  breeds: [string];
+  breeds: string[];
   url: string;
   width: number;
   height: number;

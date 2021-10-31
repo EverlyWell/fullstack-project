@@ -64,6 +64,7 @@ const Register = (props: IRegisterProps) => {
       <div className="card card-container">
         <form onSubmit={handleSubmit(onSubmit)}>
           <img
+            data-testid="register-image"
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
             className="profile-img-card"
@@ -72,6 +73,7 @@ const Register = (props: IRegisterProps) => {
         <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
+              data-testid="register-email"
               type="text"
               {...register('email')}
               className={`form-control ${errors.email ? 'is-invalid' : ''}`}
@@ -82,6 +84,7 @@ const Register = (props: IRegisterProps) => {
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
+              data-testid="register-password"
               type="password"
               {...register('password')}
               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
@@ -92,6 +95,7 @@ const Register = (props: IRegisterProps) => {
           <div className="form-group">
             <label htmlFor="passwordConfirmation">Password Confirmation</label>
             <input
+              data-testid="register-password-confirmation"
               type="password"
               {...register('passwordConfirmation')}
               className={`form-control ${errors.passwordConfirmation ? 'is-invalid' : ''}`}
@@ -101,6 +105,7 @@ const Register = (props: IRegisterProps) => {
 
           <div className="form-group form-check">
             <input
+              data-testid="register-accept-terms"
               type="checkbox"
               {...register('acceptTerms')}
               className={`form-check-input ${
@@ -125,10 +130,16 @@ const Register = (props: IRegisterProps) => {
             {loading && (
               <span className="spinner-border spinner-border-sm"></span>
             )}
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            <button
+              data-testid="register-submit"
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
               Register
             </button>
             <button
+              data-testid="register-reset"
               type="button"
               onClick={() => reset()}
               className="btn btn-warning float-right"

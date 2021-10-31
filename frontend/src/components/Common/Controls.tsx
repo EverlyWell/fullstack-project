@@ -27,6 +27,7 @@ const Controls = ({
           <label htmlFor="limit">Items per page:</label>
           <select
             id="limit"
+            data-testid="limit"
             aria-label="Items per page"
             onChange={handleLimitChange}
             value={limit}
@@ -40,6 +41,7 @@ const Controls = ({
           <label htmlFor="order">Order:</label>
           <select
             id="order"
+            data-testid="order"
             aria-label="Order"
             onChange={handleOrderChange}
             value={order}
@@ -53,6 +55,7 @@ const Controls = ({
         </div>
         <div className="row">
           <Pagination
+            data-testid="pagination"
             count={limit}
             page={page}
             siblingCount={1}

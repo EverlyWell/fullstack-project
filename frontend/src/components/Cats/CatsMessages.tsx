@@ -10,7 +10,12 @@ const CatsMessages = ({openFavoriteMessage, handleFavoriteMessageClose}: ICatsMe
   return (
     <>
       {openFavoriteMessage &&
-        <Alert variant="success" onClose={handleFavoriteMessageClose} dismissible>
+        <Alert
+          data-testid="favorite-success-alert"
+          variant="success"
+          onClose={handleFavoriteMessageClose}
+          dismissible
+        >
           Favorite save success!
         </Alert>}
     </>

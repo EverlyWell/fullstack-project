@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCats } from "../../services/cats.service";
 
-import { ICat, ICategory, IPagination } from '../../typings/typings';
+import { ICat, ICategory, IPagination } from '../../typings';
+import { getCats } from "../../services/cats.service";
 import { saveFavorite } from "../../services/favorites.service";
+
 import Controls from "../Common/Controls";
 import Filters from "../Common/Filters";
 import CatModal from "./CatModal";
@@ -65,7 +66,6 @@ const CatList = () => {
     <div className="container">
       <h1>Cats</h1>
       <div className="list row">
-        {/* Filter section */}
         <Filters
           categoryId={categoryId}
           handleCategoryChange={handleCategoryChange}

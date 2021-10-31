@@ -8,13 +8,14 @@ const Profile = () => {
     <div className="container">
       <div className="card card-container">
         <img
+          data-testid="profile-image"
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
           className="profile-img-card"
         />
         <header className="jumbotron">
           <h3>
-            <strong>{currentUser['email']}</strong> Profile
+            <strong data-testid="profile-email">{currentUser['email']}</strong> Profile
           </h3>
         </header>
         <p>
