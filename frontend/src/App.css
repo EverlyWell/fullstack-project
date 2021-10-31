@@ -71,3 +71,16 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+.list .action {
+  cursor: pointer;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group label,
+.input-group select {
+  margin-right: 4px;
+}

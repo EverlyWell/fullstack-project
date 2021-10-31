@@ -25,7 +25,11 @@ module Api::V1
     def create
       payload = {}
       payload['image_id'] = params['image_id']
-      payload['sub_id'] = params['sub_id'] unless params['sub_id'].blank?
+      payload['sub_id'] = if params['sub_id']
+                            params['sub_id']
+                          else
+                            @current_user.email
+                          end
       json_params = payload.to_json
       response = Faraday.post("#{base_url}/favourites", json_params, headers)
       render json: response.body

@@ -45,7 +45,7 @@ const Login = (props: ILoginProps) => {
       const {email, password} = data;
       await login(email, password);
       setLoading(false);
-      props.history.push("/");
+      props.history.push("/cats");
       window.location.reload();
     } catch (e) {
       console.log(e);

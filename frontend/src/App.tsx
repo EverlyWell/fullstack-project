@@ -4,12 +4,14 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import './App.css';
 import { Link, Route, Switch } from 'react-router-dom';
-import Cats from './components/Cats';
-import Login from './components/Login';
 
 import { getCurrentUser, logout } from './services/auth.service';
+import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import Public from './components/Public';
+import CatList from './components/Cats/CatList';
+import FavouriteList from './components/Favourites/FavouriteList';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -33,15 +35,29 @@ function App() {
   return (
     <>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
-        <Link to={"/"} className="navbar-brand">
-          Cats everywhere !!
-        </Link>
+        {currentUser && currentUser['email'] &&
+          <Link to={"/cats"} className="navbar-brand">
+            Cats everywhere !!
+          </Link>}
+        {currentUser && !currentUser['email'] &&
+          <Link to={"/"} className="navbar-brand">
+            Hidden cats
+          </Link>}
         <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/home"} className="nav-link">
-              Cats
-            </Link>
-          </li>
+          {currentUser && currentUser['email'] &&
+            <>
+              <li className="nav-item">
+                <Link to={"/cats"} className="nav-link">
+                  Cats
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to={"/favourites"} className="nav-link">
+                  Favourites
+                </Link>
+              </li>
+            </>
+          }
 
           {currentUser && currentUser['email'] &&
             <div className="navbar-nav ml-auto">
@@ -74,7 +90,9 @@ function App() {
       </nav>
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/home", "/cats"]} component={Cats} />
+          <Route exact path={["/", "/home"]} component={Public} />
+          <Route exact path="/cats" component={CatList} />
+          <Route exact path="/favourites" component={FavouriteList} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/profile" component={Profile} />
