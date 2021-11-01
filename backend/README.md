@@ -1,16 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Cats Backend
 
-Things you may want to cover:
+The Cats application backend.
 
-* Ruby version
-3.0.0
+## Setup
 
-* System dependencies
+### Install Ruby
 
-* Configuration
+I've used Ruby 3.0.0, which can be installed via `rvm`. [https://rvm.io/](https://rvm.io/)
+
+```bash
+# install ruby version
+rvm install "ruby-3.0.0"
+# to use the ruby version and create the given gemset
+rvm use
+```
+
+### Setup
+
+Installing dependencies.
+
+```bash
+gem install bundler
+bundle check || bundle install
+```
 
 ### Environment variables
 
@@ -18,18 +32,32 @@ Use `.env` file to declare the varialbes. (see `env.sample`)
 
 ```
 export BACKEND_DATABASE_PASSWORD=
-export CATS_API_KEY=
-export CATS_API_URL=
+export CATS_API_KEY=<key>
+export CATS_API_URL=https://api.thecatapi.com/v1
 ```
 
-* Database creation
+Note: I'm sending the Cats API key separately.
 
-* Database initialization
+### Database setup
 
-* How to run the test suite
+You can setup the Cats Database by running on a terminal:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rails db:drop db:setup
+```
 
-* Deployment instructions
+### Run test
 
-* ...
+You can run the tests, including the coverage report by running on a terminal:
+
+```bash
+rspec
+```
+
+### Start the application
+
+You can start the backend application by running on a terminal:
+
+```bash
+rails s
+```
