@@ -4,6 +4,7 @@ interface IControlsProps {
   limit: number;
   order: string;
   page: number;
+  count: number;
   handleLimitChange: any;
   handleOrderChange: any;
   handlePageChange: any;
@@ -13,6 +14,7 @@ const Controls = ({
   limit,
   order,
   page,
+  count,
   handleLimitChange,
   handleOrderChange,
   handlePageChange
@@ -56,7 +58,7 @@ const Controls = ({
         <div className="row">
           <Pagination
             data-testid="pagination"
-            count={limit}
+            count={count}
             page={page}
             siblingCount={1}
             boundaryCount={1}

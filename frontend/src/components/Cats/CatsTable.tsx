@@ -5,10 +5,10 @@ import { ICat } from "../../typings";
 interface ICatsTableProps {
   cats: ICat[];
   handleOpenCatDialog: any;
-  handleAddFavoriteClick: any;
+  handleAddFavorite: any;
 };
 
-const CatsTable = ({cats, handleOpenCatDialog, handleAddFavoriteClick}: ICatsTableProps) => {
+const CatsTable = ({cats, handleOpenCatDialog, handleAddFavorite}: ICatsTableProps) => {
   const columns = useMemo<Column<ICat>[]>(
     () => [
       {
@@ -27,7 +27,11 @@ const CatsTable = ({cats, handleOpenCatDialog, handleAddFavoriteClick}: ICatsTab
         accessor: "url",
         Cell: (props: any) => {
           return (
-            <img src={props.value} style={{maxHeight: '60px'}} alt="..." className="img-thumbnail mini"></img>
+            <img
+              src={props.value}
+              style={{maxHeight: '60px'}}
+              alt="..." className="img-thumbnail mini"
+            ></img>
           );
         },
       },
@@ -43,13 +47,14 @@ const CatsTable = ({cats, handleOpenCatDialog, handleAddFavoriteClick}: ICatsTab
         Header: "Actions",
         Cell: (props:any) => {
           const rowIdx = props.row.id;
+          const rowId = props.row.original.id;
           return (
             <div style={{ textAlign: "center" }}>
               <span onClick={() => handleOpenCatDialog(rowIdx)}>
                 <i className="fas fa-info-circle action mr-2"></i>
               </span>
               {' '}
-              <span onClick={() => handleAddFavoriteClick(rowIdx)}>
+              <span onClick={() => handleAddFavorite(rowId)}>
                 <i className="fas fa-star action mr-2"></i>
               </span>
             </div>

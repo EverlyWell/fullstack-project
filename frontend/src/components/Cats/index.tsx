@@ -12,7 +12,7 @@ import CatsMessages from "./CatsMessages";
 
 const CatList = () => {
   const [cats, setCats] = useState<Array<ICat>>([]);
-  const [,setPagination] = useState<IPagination>({
+  const [pagination, setPagination] = useState<IPagination>({
     count: 5,
     page: 1,
     limit: 5
@@ -38,7 +38,10 @@ const CatList = () => {
 
   const handleLimitChange = (evt: any) => setLimit(evt.target.value);
 
-  const handlePageChange = (_evt: any, page: number) => setPage(page);
+  const handlePageChange = (_evt: any, page: number) => {
+    setPage(page)
+    setCatIdx(-1);
+  };
 
   const handleOrderChange = (evt: any) => setOrder(evt.target.value);
 
@@ -46,8 +49,7 @@ const CatList = () => {
     setCatIdx(parseInt(idx));
   }
 
-  const handleAddFavoriteClick = async (idx: string) => {
-    const id = cats[parseInt(idx)]?.id;
+  const handleAddFavorite = async (id: string) => {
     const response = await saveFavorite(id);
     if (response.status === 200) {
       setOpenFavoriteMessage(true);
@@ -74,13 +76,14 @@ const CatList = () => {
         <CatsTable
           cats={cats}
           handleOpenCatDialog={handleOpenCatDialog}
-          handleAddFavoriteClick={handleAddFavoriteClick}
+          handleAddFavorite={handleAddFavorite}
         />
 
         <Controls
           limit={limit}
           order={order}
           page={page}
+          count={pagination.count}
           handleLimitChange={handleLimitChange}
           handleOrderChange={handleOrderChange}
           handlePageChange={handlePageChange}

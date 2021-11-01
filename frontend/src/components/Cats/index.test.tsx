@@ -9,7 +9,7 @@ describe('<CatList/>', () => {
   let mock;
   beforeEach(() => {
     mock = new MockAdapter(axios);
-    mock.onGet(new RegExp(catsApiUrl)).reply(200, {cats: []});
+    mock.onGet(new RegExp(catsApiUrl)).reply(200, {cats: [], pagination: { count: 5, page: 1, limit: 5}});
     mock.onGet(categoriesApiUrl).reply(200, []);
   });
 

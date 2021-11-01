@@ -1,4 +1,3 @@
-import { Axios } from "axios";
 import getEnvVariable from "./get-env-variable";
 
 export const baseUrl = getEnvVariable('REACT_APP_BASE_URL_CATS_API');
