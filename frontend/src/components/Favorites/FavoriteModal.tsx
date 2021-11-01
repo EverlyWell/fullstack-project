@@ -39,22 +39,22 @@ const FavoriteModal = ({favorite}: IFavoriteModalProps) => {
             className="img-thumbnail"
           ></img>
           <span>
-            Image Id: <span data-testid="cat-modal-image-id">{favorite.image_id}</span>
+            Image Id: <span data-testid="fav-modal-image-id">{favorite.image_id}</span>
           </span>
           <span>
-            Sub Id: <span data-testid="cat-modal-sub-id">{favorite.sub_id}</span>
+            Sub Id: <span data-testid="fav-modal-sub-id">{favorite.sub_id}</span>
           </span>
           <span>
-            User Id: <span data-testid="cat-modal-user-id">{favorite.user_id}</span>
+            User Id: <span data-testid="fav-modal-user-id">{favorite.user_id}</span>
           </span>
           <span>
-            Created at: <span data-testid="cat-modal-created-at">{favorite.created_at}</span>
+            Created at: <span data-testid="fav-modal-created-at">{favorite.created_at}</span>
           </span>
         </div>
       </Modal.Body>
       <Modal.Footer>
         <Button
-          data-testid="cat-modal-close-button"
+          data-testid="fav-modal-close-button"
           variant="secondary"
           onClick={handleCloseFavoriteDialog}
         >

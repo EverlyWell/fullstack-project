@@ -20,7 +20,7 @@ const FavoritesTable = ({
         accessor: "id",
       },
       {
-        Header: "ImageId",
+        Header: "Image Id",
         accessor: "image_id",
       },
       {

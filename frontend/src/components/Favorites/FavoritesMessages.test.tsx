@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react";
 import TestingProviders from "../../test-utils/testing-provider";
-import CatsMessages from "./CatsMessages";
+import FavoritesMessages from "./FavoritesMessages";
 
-describe('<CatsMessages/>', () => {
-  it('Should renders the cats messages', async () => {
+describe('<FavoritesMessages/>', () => {
+  it('Should renders the favorites messages', async () => {
     const {getByTestId} = render(
       <TestingProviders>
-        <CatsMessages
+        <FavoritesMessages
           openFavoriteMessage={true}
           handleFavoriteMessageClose={() => {}}
         />
@@ -16,6 +16,6 @@ describe('<CatsMessages/>', () => {
     const successAlert = getByTestId('favorite-success-alert');
     expect(successAlert).toBeInTheDocument();
     expect(successAlert).toBeVisible();
-    expect(successAlert).toHaveTextContent('Favorite save success!');
+    expect(successAlert).toHaveTextContent('Favorite removed successfully!');
   });
 });

@@ -15,12 +15,12 @@ describe('<CatsTable/>', () => {
   ];
 
   it('Should renders the cats table', async () => {
-    const {getByTestId, findAllByRole} = render(
+    const { getByTestId } = render(
       <TestingProviders>
         <CatsTable
           cats={cats}
           handleOpenCatDialog={() => {}}
-          handleAddFavoriteClick={() => {}}
+          handleAddFavorite={() => {}}
         />
       </TestingProviders>,
     );
@@ -39,5 +39,6 @@ describe('<CatsTable/>', () => {
     expect(cells[2].firstChild).toHaveAttribute('src', cat.url);
     expect(cells[3].textContent).toEqual(`${cat.height}`);
     expect(cells[4].textContent).toEqual(`${cat.width}`);
+    // TODO: add actions
   });
 });
