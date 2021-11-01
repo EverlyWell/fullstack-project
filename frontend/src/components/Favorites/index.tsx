@@ -3,8 +3,8 @@ import { getFavorites, removeFavorite } from "../../services/favorites.service";
 import { ICategory, IFav, IPagination } from "../../typings";
 import Controls from "../Common/Controls";
 import Filters from "../Common/Filters";
+import Messages from "../Common/Messages";
 import FavoriteModal from "./FavoriteModal";
-import FavoritesMessages from "./FavoritesMessages";
 import FavoritesTable from "./FavoritesTable";
 
 const FavoritesList = () => {
@@ -20,7 +20,9 @@ const FavoritesList = () => {
   const [limit, setLimit] = useState<number>(5);
   const [page, setPage] = useState<number>(1);
   const [order, setOrder] = useState<string>('Desc');
-  const [openFavoriteMessage, setOpenFavoriteMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [variant,] = useState<string>('success');
+  const [openMessage, setOpenMessage] = useState<boolean>(false);
 
   async function getFavoritesPrivate(category: ICategory | undefined, limit: number, page: number, order: string) {
     const favoritesResponse = await getFavorites(category, limit, page, order);
@@ -29,7 +31,11 @@ const FavoritesList = () => {
   }
 
   useEffect(() => {
-    getFavoritesPrivate(category, limit, page, order);
+    try {
+      getFavoritesPrivate(category, limit, page, order);
+    } catch (e) {
+      console.log(e);
+    }
   }, [limit, page, order, category]);
 
   const handleLimitChange = (evt: any) => setLimit(evt.target.value);
@@ -45,13 +51,14 @@ const FavoritesList = () => {
     setFavIdx(parseInt(idx));
   }
 
-  const handleFavoriteMessageClose = () => setOpenFavoriteMessage(false);
+  const handleMessageClose = () => setOpenMessage(false);
 
   const handleRemoveFavorite = async (id: string) => {
     const response = await removeFavorite(id);
     if (response.status === 200) {
       getFavoritesPrivate(category, limit, 1, order);
-      setOpenFavoriteMessage(true);
+      setMessage('Favorite removed successfully!');
+      setOpenMessage(true);
     }
   }
 
@@ -69,13 +76,17 @@ const FavoritesList = () => {
           categoryId={categoryId}
           handleCategoryChange={handleCategoryChange}
         />
+      </div>
 
+      <div className="list row">
         <FavoritesTable
           favorites={favorites}
           handleOpenFavoriteDialog={handleOpenFavoriteDialog}
           handleRemoveFavorite={handleRemoveFavorite}
         />
+      </div>
 
+      <div className="list row">
         <Controls
           limit={limit}
           order={order}
@@ -85,14 +96,18 @@ const FavoritesList = () => {
           handleOrderChange={handleOrderChange}
           handlePageChange={handlePageChange}
         />
+      </div>
 
+      <div className="list row">
         <FavoriteModal
           favorite={favorites[favIdx]}
         />
 
-        <FavoritesMessages
-          openFavoriteMessage={openFavoriteMessage}
-          handleFavoriteMessageClose={handleFavoriteMessageClose}
+        <Messages
+          message={message}
+          variant={variant}
+          openMessage={openMessage}
+          handleMessageClose={handleMessageClose}
         />
       </div>
     </div>

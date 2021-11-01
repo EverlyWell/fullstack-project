@@ -10,6 +10,7 @@ describe('<Controls/>', () => {
           limit={10}
           order={'Asc'}
           page={1}
+          count={10}
           handleLimitChange={() => {}}
           handleOrderChange={() => {}}
           handlePageChange={() => {}}

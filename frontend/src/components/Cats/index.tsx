@@ -6,9 +6,9 @@ import { saveFavorite } from "../../services/favorites.service";
 
 import Controls from "../Common/Controls";
 import Filters from "../Common/Filters";
+import Messages from "../Common/Messages";
 import CatModal from "./CatModal";
 import CatsTable from "./CatsTable";
-import CatsMessages from "./CatsMessages";
 
 const CatList = () => {
   const [cats, setCats] = useState<Array<ICat>>([]);
@@ -23,14 +23,20 @@ const CatList = () => {
   const [limit, setLimit] = useState<number>(5);
   const [page, setPage] = useState<number>(1);
   const [order, setOrder] = useState<string>('Desc');
-  const [openFavoriteMessage, setOpenFavoriteMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
+  const [variant,] = useState<string>('success');
+  const [openMessage, setOpenMessage] = useState<boolean>(false);
 
 
   useEffect(() => {
     async function getCatsPrivate() {
-      const catsResponse = await getCats(category, limit, page, order);
-      setCats(catsResponse.cats);
-      setPagination(catsResponse.pagination);
+      try {
+        const catsResponse = await getCats(category, limit, page, order);
+        setCats(catsResponse.cats);
+        setPagination(catsResponse.pagination);
+      } catch (e) {
+        console.log(e);
+      }
     }
     getCatsPrivate();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,11 +58,15 @@ const CatList = () => {
   const handleAddFavorite = async (id: string) => {
     const response = await saveFavorite(id);
     if (response.status === 200) {
-      setOpenFavoriteMessage(true);
+      setMessage('Favorite save success!');
+      setOpenMessage(true);
     }
   }
 
-  const handleFavoriteMessageClose = () => setOpenFavoriteMessage(false);
+  const handleMessageClose = () => {
+    setMessage('');
+    setOpenMessage(false);
+  }
 
   const handleCategoryChange = (categoryId: number, selectedCategory: ICategory) => {
     setCategoryId(categoryId);
@@ -72,13 +82,17 @@ const CatList = () => {
           categoryId={categoryId}
           handleCategoryChange={handleCategoryChange}
         />
+      </div>
 
+      <div className="list row">
         <CatsTable
           cats={cats}
           handleOpenCatDialog={handleOpenCatDialog}
           handleAddFavorite={handleAddFavorite}
         />
+      </div>
 
+      <div className="list row">
         <Controls
           limit={limit}
           order={order}
@@ -88,14 +102,18 @@ const CatList = () => {
           handleOrderChange={handleOrderChange}
           handlePageChange={handlePageChange}
         />
+      </div>
 
+      <div className="list row">
         <CatModal
           cat={cats[catIdx]}
         />
 
-        <CatsMessages
-          openFavoriteMessage={openFavoriteMessage}
-          handleFavoriteMessageClose={handleFavoriteMessageClose}
+        <Messages
+          message={message}
+          variant={variant}
+          openMessage={openMessage}
+          handleMessageClose={handleMessageClose}
         />
       </div>
     </div>

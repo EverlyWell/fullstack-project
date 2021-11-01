@@ -12,7 +12,12 @@ const Filters = ({categoryId, handleCategoryChange}: IFiltersProps) => {
 
   useEffect(() => {
     async function getCategoriesPrivate() {
-      setCategories(await getCategories());
+      try {
+        const categories = await getCategories()
+        setCategories(categories);
+      } catch(e) {
+        console.log(e);
+      }
     }
 
     if (categories.length === 0) {
