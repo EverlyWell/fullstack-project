@@ -7,13 +7,17 @@ module Api::V1
       search_url = "#{base_url}/favourites"
       params = {}
       params['sub_id'] = sub_id if sub_id.present?
+      params['category_ids'] = category_ids
       params['limit'] = limit
       params['page'] = page
       params['order'] = order
       response = Faraday.get(search_url, params, headers)
+      puts "@@@@@ #{response.body}"
+      puts "##### #{response.headers}"
       favs_response = {
         favs: JSON.parse(response.body),
         pagination: {
+          # pagination-count is making the right calculation.
           count: response.headers['pagination-count'].to_i,
           page: response.headers['pagination-page'].to_i,
           limit: response.headers['pagination-limit'].to_i
@@ -45,6 +49,11 @@ module Api::V1
 
     def sub_id
       params[:sub_id] || ''
+    end
+
+    def category_ids
+      return '' unless params[:category_ids].present?
+      params[:category_ids]
     end
   end
 end
