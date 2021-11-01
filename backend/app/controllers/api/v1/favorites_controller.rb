@@ -12,8 +12,6 @@ module Api::V1
       params['page'] = page
       params['order'] = order
       response = Faraday.get(search_url, params, headers)
-      puts "@@@@@ #{response.body}"
-      puts "##### #{response.headers}"
       favs_response = {
         favs: JSON.parse(response.body),
         pagination: {

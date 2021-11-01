@@ -65,6 +65,8 @@ group :test do
   # record and reuse responses
   gem 'webmock'
   gem 'vcr'
+  # code coverage
+  gem 'simplecov', require: false, group: :test
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

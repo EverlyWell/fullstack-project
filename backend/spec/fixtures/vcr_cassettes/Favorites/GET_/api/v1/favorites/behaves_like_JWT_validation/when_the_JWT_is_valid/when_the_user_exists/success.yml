@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.thecatapi.com/v1/favourites?limit=3&order=Asc&page=1
+    uri: https://api.thecatapi.com/v1/favourites?category_ids=&limit=3&order=Asc&page=1
     body:
       encoding: US-ASCII
       string: ''
@@ -33,7 +33,7 @@ http_interactions:
       vary:
       - Origin
       pagination-count:
-      - '11'
+      - '13'
       pagination-page:
       - '1'
       pagination-limit:
@@ -43,17 +43,17 @@ http_interactions:
       content-type:
       - application/json; charset=utf-8
       x-response-time:
-      - 135ms
+      - 127ms
       x-cloud-trace-context:
-      - a4b5a8f8f1b8e86f065090b9eacee7bb
+      - 48f828c027623ea3902134bbff30a94a
       date:
-      - Sun, 31 Oct 2021 18:43:36 GMT
+      - Mon, 01 Nov 2021 02:15:15 GMT
       server:
       - Google Frontend
       content-length:
-      - '536'
+      - '625'
     body:
       encoding: UTF-8
-      string: '[{"id":2102473,"user_id":"dccq5n","image_id":"1","sub_id":"challenge","created_at":"2021-09-20T14:49:03.000Z","image":{"id":"1","url":"https://cdn2.thecatapi.com/images/1.jpg"}},{"id":2102486,"user_id":"dccq5n","image_id":"1c","sub_id":null,"created_at":"2021-09-20T16:53:05.000Z","image":{"id":"1c","url":"https://cdn2.thecatapi.com/images/1c.gif"}},{"id":2138537,"user_id":"dccq5n","image_id":"g","sub_id":"example@gmail.com","created_at":"2021-10-29T23:58:05.000Z","image":{"id":"g","url":"https://cdn2.thecatapi.com/images/g.jpg"}}]'
-  recorded_at: Sun, 31 Oct 2021 18:43:36 GMT
+      string: '[{"id":2138576,"user_id":"dccq5n","image_id":"ni9-V59Bg","sub_id":"omarps@gmail.com","created_at":"2021-10-31T02:03:49.000Z","image":{"id":"ni9-V59Bg","url":"https://cdn2.thecatapi.com/images/ni9-V59Bg.jpg"}},{"id":2138577,"user_id":"dccq5n","image_id":"pu5LUb7Bt","sub_id":"omarps@gmail.com","created_at":"2021-10-31T02:05:42.000Z","image":{"id":"pu5LUb7Bt","url":"https://cdn2.thecatapi.com/images/pu5LUb7Bt.jpg"}},{"id":2138578,"user_id":"dccq5n","image_id":"CW8s9pvnM","sub_id":"omarps@gmail.com","created_at":"2021-10-31T02:06:06.000Z","image":{"id":"CW8s9pvnM","url":"https://cdn2.thecatapi.com/images/CW8s9pvnM.jpg"}}]'
+  recorded_at: Mon, 01 Nov 2021 02:15:15 GMT
 recorded_with: VCR 6.0.0

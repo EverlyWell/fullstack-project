@@ -1,2 +1,5 @@
 .idea/
 
+# Ignore coverage
+/coverage
+/coverage/*
