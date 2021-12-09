@@ -6,7 +6,6 @@ import { getGiphyImages } from '../../services/apiClient'
 
 export default function ImagesContainer(props: {params: {query: string}}) {
     const { params: { query } } = props
-    console.log(query)
 
     const [loading, setLoading] = useState(false)
     const [images, setImages] = useState([])

@@ -8,9 +8,7 @@ export default function ImagesContainer(props: {imageUrl: string, title: string,
     const { imageUrl, title, className, id } = props
 
     const submitFavImage = (event: any) => {
-        favImage(id).then((response) => {
-            console.log(response)
-        })
+        favImage(id)
     }
 
     return (

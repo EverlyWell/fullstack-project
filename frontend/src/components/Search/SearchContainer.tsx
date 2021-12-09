@@ -11,14 +11,12 @@ export default function SearchContainer(props: any) {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log(query)
 
         pushLocation(`/images/${query}`)
         // changeQuery({query: event.target.value});
     }
 
     const handleChange = (event: any) => {
-        console.log(event.target.value)
         setQuery(event.target.value)
     }
 
