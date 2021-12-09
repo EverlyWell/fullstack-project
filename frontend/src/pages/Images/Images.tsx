@@ -8,10 +8,6 @@ export default function Images(props: {images: Array<{ title: string, imageUrl: 
 
     return (
         <div className="imagesContainer">
-            <h2 className="instructions">
-                Select the cuteness
-            </h2>
-
             <ImagesList images={images} loading={loading} />
         </div>
     );

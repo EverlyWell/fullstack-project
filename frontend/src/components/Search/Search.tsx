@@ -9,7 +9,7 @@ export default function SearchComponent (props: any) {
         <form onSubmit={onSubmit} className='searchForm'>
             <input type='textbox' onChange={ onChange } value={value} />
 
-            <button> Get the cuteness </button>
+            <button> Get more cuteness </button>
         </form>
     )
 }
