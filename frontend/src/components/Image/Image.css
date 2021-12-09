@@ -1,0 +1,5 @@
+.Image img {
+    width: 100%;
+    object-fit: contain;
+    background: green;
+}

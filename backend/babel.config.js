@@ -27,6 +27,7 @@ module.exports = function(api) {
       ],
       (isProductionEnv || isDevelopmentEnv) && [
         '@babel/preset-env',
+        '@babel/preset-react',
         {
           forceAllTransforms: true,
           useBuiltIns: 'entry',
