@@ -8,6 +8,12 @@ module Api
       render json: { fav: fav.id }
     end
 
+    def index
+      favs = Fav.all.order(:created_at)
+
+      render json: favs.to_json
+    end
+
     private
 
     def permitted_params
