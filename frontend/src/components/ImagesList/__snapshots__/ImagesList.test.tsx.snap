@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImagesList matches the snapshot 1`] = `
+<ul
+  className="imagesList"
+>
+  <li
+    key="189094"
+  >
+    <Image
+      className="Image"
+      imageUrl="https://picsum.photos/300/200"
+      key="189094"
+      title="photo 1"
+    />
+  </li>
+  <li
+    key="189093"
+  >
+    <Image
+      className="Image"
+      imageUrl="https://picsum.photos/200/300"
+      key="189093"
+      title="photo 2"
+    />
+  </li>
+</ul>
+`;
