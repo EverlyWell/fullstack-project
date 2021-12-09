@@ -1,1 +1,0 @@
-import imagesList from './imagesList';
