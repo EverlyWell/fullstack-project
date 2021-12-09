@@ -1,9 +1,11 @@
 import React from 'react';
 import './App.css';
 
-import { Link, Route } from "wouter";
+import { Route } from "wouter";
 
 import Images from './pages/Images'
+
+import Search from './components/Search'
 
 const ImagesRoute = () => (
     // wouter types are not playing nice with our props
@@ -20,6 +22,8 @@ function App() {
                     Cute collector
                 </h1>
             </header>
+
+            <Search />
             
             <ImagesRoute/> 
         </div>
