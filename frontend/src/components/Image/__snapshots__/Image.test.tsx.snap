@@ -1,18 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Image matches the snapshot 1`] = `
-<picture
+<Image
   className="Image"
->
-  <source
-    srcSet="https://picsum.photos/200/300"
-  />
-  <img
-    alt="photo"
-    src="https://picsum.photos/200/300"
-  />
-  <p>
-    photo
-  </p>
-</picture>
+  imageUrl="https://picsum.photos/200/300"
+  onChange={[Function]}
+  title="photo"
+/>
 `;

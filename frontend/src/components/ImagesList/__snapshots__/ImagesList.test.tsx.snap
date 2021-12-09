@@ -7,8 +7,9 @@ exports[`ImagesList matches the snapshot 1`] = `
   <li
     key="189094"
   >
-    <Image
+    <ImagesContainer
       className="Image"
+      id="189094"
       imageUrl="https://picsum.photos/300/200"
       key="189094"
       title="photo 1"
@@ -17,8 +18,9 @@ exports[`ImagesList matches the snapshot 1`] = `
   <li
     key="189093"
   >
-    <Image
+    <ImagesContainer
       className="Image"
+      id="189093"
       imageUrl="https://picsum.photos/200/300"
       key="189093"
       title="photo 2"

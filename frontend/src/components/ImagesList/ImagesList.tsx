@@ -27,6 +27,7 @@ export default function ImagesList(props: {images: Array<{ title: string, imageU
                         title={title}
                         imageUrl={imageUrl}
                         className={'Image'}
+                        id={id}
                     />
                 </li>
                 )
