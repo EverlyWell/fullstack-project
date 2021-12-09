@@ -14,7 +14,7 @@ const responseToImages = (response: any) => {
 export default function getGiphyImages(keyword: string) {
     const limit = 15;
     const rating = 'g'; // kids friendly
-    const apiURL = `${API_URL}?api_key=${API_KEY}&q=${keyword}&limit=${limit}&rating=${rating}`
+    const apiURL = `${GIPHY_API_URL}?api_key=${GIPHY_API_KEY}&q=${keyword}&limit=${limit}&rating=${rating}`
 
     return fetch(apiURL)
         .then((res) => res.json())
