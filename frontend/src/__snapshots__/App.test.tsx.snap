@@ -11,5 +11,6 @@ exports[`App renders successfully 1`] = `
       Cute collector
     </h1>
   </header>
+  <ImagesRoute />
 </div>
 `;
