@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import getGiphyImages from './apiClient'
+import { getGiphyImages } from './apiClient'
 
 describe('getGiphyImages', () => {
     global.fetch = jest.fn(() => {

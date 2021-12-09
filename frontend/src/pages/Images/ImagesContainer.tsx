@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Images from './Images'
 
-import getGiphyImages from '../../services/apiClient'
+import { getGiphyImages } from '../../services/apiClient'
 
 export default function ImagesContainer(props: {params: {query: string}}) {
     const { params: { query } } = props
