@@ -4,6 +4,17 @@ exports[`App renders successfully 1`] = `
 <div
   className="App"
 >
+  <menu>
+    <Link
+      href="/favs"
+    >
+      <a
+        href="/favs"
+      >
+         Saved cuteness 
+      </a>
+    </Link>
+  </menu>
   <header
     className="App-header"
   >
@@ -12,6 +23,7 @@ exports[`App renders successfully 1`] = `
     </h1>
   </header>
   <SearchContainer />
+  <FavedImagesRoute />
   <ImagesRoute />
 </div>
 `;

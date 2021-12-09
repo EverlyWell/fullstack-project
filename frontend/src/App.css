@@ -4,6 +4,13 @@
 
 body {
   background-color: #282c34;
+  color: white;
+}
+
+menu a {
+    color: white;
+    float: right;
+    padding: 20px;
 }
 
 .App-header {
